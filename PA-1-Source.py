@@ -2,16 +2,13 @@
 # Brute Force and Euclid's GCD Algorithms
 
 from csvGen import *
+import random
 
 # generate 1000 pairs of random integers
-data = [
-    ["John", "25", "New York"],
-    ["Emma", "30", "London"],
-    ["Michael", "35", "Tokyo"]
-]
-formatData(data)
-
-test("test", data)
+pairs = [[0] * 2] * 1000
+for i in range(len(pairs)):
+    for j in range(len(pairs[i])):
+        pairs[i][j] = random.randint(1, 1000)
 
 # --------------------------------------------------------
 # BRUTE FORCE ALGS =======================================

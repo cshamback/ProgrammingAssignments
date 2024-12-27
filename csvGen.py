@@ -4,16 +4,6 @@ import csv
 # one function for each, takes name of file (depends on algorithm and version used) and 2D array of data 
 # rows and columns of 2D array correspond to rows and cols of spreadsheet!
 
-def test(filename, data):
-    with open(filename + '.csv', 'w', newline = '') as file: 
-        writer = csv.writer(file)
-
-        # hardcoded header row 
-        writer.writerow([" Name", " Age", " City"])
-
-        # array of data passed as parameter 
-        writer.writerows(data[0:])
-
 def resultsCSV(filename, data):
     with open(filename + '.csv', 'w', newline = '') as file: 
         writer = csv.writer(file)
@@ -45,8 +35,6 @@ def formatData(data):
     # find the longest string in each column, store in maxLengths
     for i in range(len(data[0])): # iterate through columns in the first row 
         for j in range(len(data)): # for each of those columns, go all the way down through every row 
-
-            print("Current item:", data[j][i], " Length: ", len(data[j][i]), " Max length: ", maxLengths[i])
 
             if(len(data[j][i]) > maxLengths[i]):
                 maxLengths[i] = len(data[j][i])
