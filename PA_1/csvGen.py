@@ -15,7 +15,7 @@ def resultsCSV(filename, data):
         writer.writerows(data[0:])
 
 def statsCSV(filename, data):
-    with open(filename + '.csv', 'w', newline = '') as file: 
+    with open("PA_1/output/" + filename + '.csv', 'w', newline = '') as file: 
         writer = csv.writer(file)
 
         # hardcoded header row 
@@ -30,7 +30,7 @@ def formatData(data, headingRow):
 
     # this array is the same length as the number of columns in the 2D array.
     # for each column, it holds the longest string in that column 
-    maxLengths = [0] * len(data[0])
+    maxLengths = [0] * len(headingRow[0])
 
     # first, set the max lengths to the lengths of the header strings
     # these are not part of the data array, so use them as the starting point
@@ -51,3 +51,33 @@ def formatData(data, headingRow):
 
             numSpaces = maxLengths[i] - len(data[j][i])
             data[j][i] = " " + data[j][i] + " " * (numSpaces) # add an extra whitespace at the beginning for readability 
+
+# find minimum, maximum, average, and median for statistics csvs 
+# data is a 1D array representing the last column (time) of the results csv.
+
+def getStats(data):
+    median = data[len(data) // 2][3] # floor division to find the "middle" of the array
+
+    total = 0.0
+    maxTime = 0
+    minTime = float('inf') # represents positive infinity as a float 
+
+    # iterate through each row in the 2D array
+    # always look at the last column (index 3)
+    for i in range(0, len(data)):
+        total = total + float(data[i][3])
+
+        if float(data[i][3]) > float(maxTime): 
+            maxTime = data[i][3]
+        if float(data[i][3]) < float(minTime): 
+            minTime = data[i][3]
+
+    avg = float(total) / 1000 # hard coded, fine for the purposes of this assignment since they never require any number other than 1000 
+
+    # leave as string for storage - need to use string function len() when formatting table 
+    return [
+        ["Maximum Time", str(maxTime)],
+        ["Minumum Time", str(minTime)],
+        ["Average Time", str(avg)],
+        ["Median Time", str(median)]
+    ]

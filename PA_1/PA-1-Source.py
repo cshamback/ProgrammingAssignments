@@ -46,6 +46,7 @@ for i in range(0, len(pairs)): # iterate through rows
 # generate results spreadsheet for v1 and v2
 
 print("formatting data and getting results...")
+
 formatData(bfResultsV1, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 formatData(bfResultsV2, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
@@ -53,6 +54,18 @@ resultsCSV("BF_v1_Results", bfResultsV1)
 resultsCSV("BF_v2_Results", bfResultsV2)
 
 # generate statistics spreadsheet for v1 and v2
+
+# returns 2D array with max/min/average/median
+bfStatsV1 = getStats(bfResultsV1)
+bfStatsV2 = getStats(bfResultsV2)
+
+# formats that data 
+formatData(bfStatsV1, ["Statistics", "Milliseconds"])
+formatData(bfStatsV2, ["Statistics", "Milliseconds"])
+
+# generates csv 
+statsCSV("BF_v1_Statistics", bfStatsV1)
+statsCSV("BF_v2_Statistics", bfStatsV2)
 
 print("brute force done!")
 
@@ -69,7 +82,7 @@ seStats = [[] * 2] * 1000
 
 # run euclid v1
 
-print("euclidean v1...")
+print("euclid v1...")
 for i in range(0, len(pairs)): # iterate through rows 
     currentTime = datetime.now()
     gcd = euclidV1(pairs[i])
