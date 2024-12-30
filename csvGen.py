@@ -26,11 +26,16 @@ def statsCSV(filename, data):
 
 # add whitespace to items in 2D array so that the data is neatly lined up in the resulting csv file 
 
-def formatData(data):
+def formatData(data, headingRow):
 
     # this array is the same length as the number of columns in the 2D array.
     # for each column, it holds the longest string in that column 
     maxLengths = [0] * len(data[0])
+
+    # first, set the max lengths to the lengths of the header strings
+    # these are not part of the data array, so use them as the starting point
+    for i in range(len(headingRow)):
+        maxLengths[i] = len(headingRow[i])
 
     # find the longest string in each column, store in maxLengths
     for i in range(len(data[0])): # iterate through columns in the first row 
