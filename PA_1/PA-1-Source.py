@@ -98,10 +98,22 @@ print("formatting data and getting results...")
 formatData(oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 # formatData(seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
-resultsCSV("OE_v1_Results", oeResults)
+resultsCSV("OE_Results", oeResults)
 # resultsCSV("SE_v2_Results", seResults)
 
 # generate statistics spreadsheet for v1 and v2
+
+# returns 2D array with max/min/average/median
+oeStats = getStats(oeResults)
+#seStats = getStats(seResults)
+
+# formats that data 
+formatData(oeStats, ["Statistics", "Milliseconds"])
+#formatData(seResults, ["Statistics", "Milliseconds"])
+
+# generates csv 
+statsCSV("OE_Statistics", oeStats)
+#statsCSV("SE_Statistics", seStats)
 
 print("euclid done!")
 
