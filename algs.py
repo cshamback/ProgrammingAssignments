@@ -33,6 +33,8 @@ def bruteForceV2(pair):
 # EUCLIDEAN ALGS =========================================================
 # ------------------------------------------------------------------------
 
+# formula: a = bq + r
+
 # base Euclidean algorithm 
 def euclidV1(pair):
     num1 = pair[0]
@@ -56,12 +58,18 @@ def euclidV1(pair):
         
         # assign q and r 
         q = a // b # // is the floor division operator
-        r = a - (b * q)
+        tempR = a - (b * q)
+        
+        # if the new remainder is 0, we've gone too far. 
+        # return the previous r value, and we're done 
+        if tempR == 0: 
+            return r 
+        else:
+            r = tempR
 
         # assign new a and b 
         a = b
         b = r
-        prevR = r
 
     return prevR
 
