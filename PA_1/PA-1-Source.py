@@ -52,9 +52,9 @@ formatData(bfResultsV2, ["Number One", "Number Two", "Their GCD", "Time Spent (M
 resultsCSV("BF_v1_Results", bfResultsV1)
 resultsCSV("BF_v2_Results", bfResultsV2)
 
-print("brute force done!")
-
 # generate statistics spreadsheet for v1 and v2
+
+print("brute force done!")
 
 # --------------------------------------------------------
 # EUCLIDEAN ALGS =========================================
@@ -67,9 +67,30 @@ seResults = [[] * 4] * 1000
 oeStats = [[] * 2] * 1000
 seStats = [[] * 2] * 1000
 
+# run euclid v1
+
+print("euclidean v1...")
+for i in range(0, len(pairs)): # iterate through rows 
+    currentTime = datetime.now()
+    gcd = euclidV1(pairs[i])
+    newTime = datetime.now()
+
+    oeResults[i] = [str(pairs[i][0]), str(pairs[i][1]), str(gcd), str((newTime - currentTime).total_seconds() * 1000)]
+
+# run euclid v2
+
 # generate results spreadsheet for v1 and v2
 
+print("formatting data and getting results...")
+formatData(oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
+# formatData(seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
+
+resultsCSV("OE_v1_Results", oeResults)
+# resultsCSV("SE_v2_Results", seResults)
+
 # generate statistics spreadsheet for v1 and v2
+
+print("euclid done!")
 
 # --------------------------------------------------------
 # CONCLUSIONS.TXT ========================================

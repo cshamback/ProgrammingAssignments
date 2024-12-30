@@ -5,7 +5,7 @@ import csv
 # rows and columns of 2D array correspond to rows and cols of spreadsheet!
 
 def resultsCSV(filename, data):
-    with open(filename + '.csv', 'w', newline = '') as file: 
+    with open("PA_1/output/" + filename + '.csv', 'w', newline = '') as file: 
         writer = csv.writer(file)
 
         # hardcoded header row 
