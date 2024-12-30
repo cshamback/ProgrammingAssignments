@@ -50,8 +50,8 @@ print("formatting data and getting results...")
 formatData(bfResultsV1, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 formatData(bfResultsV2, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
-resultsCSV("BF_v1_Results", bfResultsV1)
-resultsCSV("BF_v2_Results", bfResultsV2)
+csvGen("BF_v1_Results", bfResultsV1, ["Number One", " Number Two", " Their GCD", " Time Spent (Milliseconds)"])
+csvGen("BF_v2_Results", bfResultsV2, ["Number One", " Number Two", " Their GCD", " Time Spent (Milliseconds)"])
 
 # generate statistics spreadsheet for v1 and v2
 
@@ -64,8 +64,8 @@ formatData(bfStatsV1, ["Statistics", "Milliseconds"])
 formatData(bfStatsV2, ["Statistics", "Milliseconds"])
 
 # generates csv 
-statsCSV("BF_v1_Statistics", bfStatsV1)
-statsCSV("BF_v2_Statistics", bfStatsV2)
+csvGen("BF_v1_Statistics", bfStatsV1, ["Statistics", " Milliseconds"])
+csvGen("BF_v2_Statistics", bfStatsV2, ["Statistics ", " Milliseconds"])
 
 print("brute force done!")
 
@@ -98,8 +98,8 @@ print("formatting data and getting results...")
 formatData(oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 # formatData(seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
-resultsCSV("OE_Results", oeResults)
-# resultsCSV("SE_v2_Results", seResults)
+csvGen("OE_Results", oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
+# csvGen("SE_Results", seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
 # generate statistics spreadsheet for v1 and v2
 
@@ -112,8 +112,8 @@ formatData(oeStats, ["Statistics", "Milliseconds"])
 #formatData(seResults, ["Statistics", "Milliseconds"])
 
 # generates csv 
-statsCSV("OE_Statistics", oeStats)
-#statsCSV("SE_Statistics", seStats)
+csvGen("OE_Statistics", oeStats, ["Statistics", " Milliseconds"])
+# csvGen("SE_Statistics", seStats, ["Statistics", " Milliseconds"])
 
 print("euclid done!")
 

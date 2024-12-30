@@ -4,22 +4,12 @@ import csv
 # one function for each, takes name of file (depends on algorithm and version used) and 2D array of data 
 # rows and columns of 2D array correspond to rows and cols of spreadsheet!
 
-def resultsCSV(filename, data):
+def csvGen(filename, data, headerRow):
     with open("PA_1/output/" + filename + '.csv', 'w', newline = '') as file: 
         writer = csv.writer(file)
 
-        # hardcoded header row 
-        writer.writerow(["Number One", " Number Two", " Their GCD", " Time Spent (Milliseconds)"])
-
-        # array of data passed as parameter 
-        writer.writerows(data[0:])
-
-def statsCSV(filename, data):
-    with open("PA_1/output/" + filename + '.csv', 'w', newline = '') as file: 
-        writer = csv.writer(file)
-
-        # hardcoded header row 
-        writer.writerow(["Statistics", " Milliseconds"])
+        # header row is passed as a param, so it doesn't have to be part of the data array
+        writer.writerow(headerRow)
 
         # array of data passed as parameter 
         writer.writerows(data[0:])
