@@ -1,4 +1,3 @@
-# Cody Shamback, Liem Chau, Steve Nguyen
 # Brute Force and Euclid's GCD Algorithms
 
 from csvGen import *

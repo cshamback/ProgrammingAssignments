@@ -10,10 +10,16 @@ print("New data: ", mergeSort(0, int(len(data)), data))
 # PREMADE ARRAYS =========================================================
 # ------------------------------------------------------------------------
 
-# fill out 9 arrays (for loop, 2D array with 1 row for each)
-# merge sort each row, get data (second 2D array)
+# fill out 9 arrays (might want to )
+# merge sort each row, get data (2D array, used for csv input)
 # put into csv 
 
 # ------------------------------------------------------------------------
 # UI =====================================================================
 # ------------------------------------------------------------------------
+
+# tell user they can input a number 1 ... 9 and press any other key to escape 
+# input while loop 
+
+# display Array_i 
+# display Sorted_Array_i
