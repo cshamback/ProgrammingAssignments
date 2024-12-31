@@ -2,9 +2,9 @@ from csvGen import *
 from mergeSort import * 
 
 # DEMO - delete later
-data = [5454654, 434234, 44354, 32423424, 654, 324234, 43645, 3554]
-mergeSort(data)
-
+data = [1, 2, 4, 6, 7, 3, 9, 5, 10, 8, 5645645, 645654, 4343, 23423, -2, -5, 0]
+print("Old data: ", data)
+print("New data: ", mergeSort(0, int(len(data)), data))
 
 # ------------------------------------------------------------------------
 # PREMADE ARRAYS =========================================================

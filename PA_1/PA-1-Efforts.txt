@@ -1,8 +1,7 @@
 # How to run the program?
 
 # How were spreadsheets generated?
-Spreadsheets were generated programmatically in the methods resultsCSV() and statsCSV().
-
+Spreadsheets were generated programmatically in the csvgen() method.
 
 # Group member contribution
 Cody Shamback: xxx% (Cody Shamback)
