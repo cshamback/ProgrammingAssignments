@@ -27,11 +27,19 @@ def getArray(input):
 # GET GRAPH FROM USER ==================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+print("GRAPH CREATION ========================================================================================================")
 print("Enter nodes one at a time.")
-print("Each should be a series of integers separated by commas. Press enter between nodes.")
+print("Each should be a series of integers (other nodes this node connects to) separated by commas. Press enter between nodes.\n")
+
 print("Nodes will be named automatically, with numbers starting from 0 in ascending order.")
-print("Any nodes that were not created but have edges connected to them will also be added automatically.")
+print("Any nodes that were not created but have edges connected to them will also be added automatically.\n")
+
+print("Example: if you create a single node with edges 4 and 5, you'll get 6 nodes:")
+print("0: [4, 5], 1: [], 2: [], 3: [], 4: [0], 5: [0]")
+print("Please note that nodes 1, 2, and 3 exist but are isolated without any edges.\n")
+
 print("Press Q to finish.")
+print("======================================================================================================================")
 nextInput = "" # declare input outside while loop but don't get a value yet 
 
 while(nextInput != "q" and nextInput != "Q"):
