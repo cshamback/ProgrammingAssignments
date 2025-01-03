@@ -1,7 +1,7 @@
-# IMPLEMENTATION OF GRAPH DATA STRUCTURE 
+# IMPLEMENTATION OF AN UNDIRECTED GRAPH DATA STRUCTURE 
 
 # each graph object is a 2D array: 
-#    the index of a row is the name of the node 
+#   the index of a row is the name of the node 
 #   the contents of the rows are nodes that connect to it (edges)
 
 class Graph: 
@@ -16,6 +16,8 @@ class Graph:
         # prevent duplicate edges by checking first if the edge is already there 
         if not (b in self.graph[a]):
             self.graph[a].append(b)
+        if not (a in self.graph[b]):
+            self.graph[b].append(a)
 
     # add a new row to the table
     # a vertex is an array of edges that connect to the vertex
