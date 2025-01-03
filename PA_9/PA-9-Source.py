@@ -53,6 +53,7 @@ while(nextInput != "q" and nextInput != "Q"):
 # add extra nodes: user can specify edges that were not added as nodes:
 #   ie. have nodes named 0 and 1 that connect to a 4 and a 5, but never actually created 4 and 5.
 #   we need to make these nodes exist, as well as a node 2 and 3 that have no edges since none were specified 
+#   since we are using a directed graph as required by SCC, we only create nodes going to 4 and 5 from 0, not the other way around 
 
 graphArr = graph.getGraph()
 for currNode in range(0, len(graphArr)): # look at every node 
@@ -78,7 +79,8 @@ graph.printGraph()
 nextInput = input("Would you like to add any additional edges before moving on to the SCC algorithm? (Y/N)")
 
 if(nextInput == "Y" or nextInput == "y"):
-    print("Please enter your additional edges as sets of two integers (the nodes with that edge) separated by a comma. Press Q when finished.")
+    print("Please enter your additional edges as sets of two integers (the nodes with that edge) separated by a comma.")
+    print("The first number is the node ID of the origin, and the second number is the node ID of the destination. Press Q when finished.")
     while(nextInput != "q" and nextInput != "Q"):
         nextInput = input()
 

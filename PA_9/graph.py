@@ -11,14 +11,11 @@ class Graph:
         self.graph = []
 
     # adding an edge between a and b (integers, each representing a node)
-    # adds b to a's row and a to b's row 
+    # direction a -> b (row a has edge b)
     def addEdge(self, a, b):
         # prevent duplicate edges by checking first if the edge is already there 
         if not (b in self.graph[a]):
             self.graph[a].append(b)
-            
-        if not (a in self.graph[b]):
-            self.graph[b].append(a)
 
     # add a new row to the table
     # a vertex is an array of edges that connect to the vertex
