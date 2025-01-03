@@ -27,6 +27,18 @@ def getArray(input):
 
 graph = Graph()
 
+demoGraph = [
+    [1, 2, 3],
+    [0, 2],
+    [4],
+    [1, 2, 4],
+    [0]
+]
+graph.setGraph(demoGraph)
+graph.printGraph()
+
+
+'''
 print("GRAPH CREATION ========================================================================================================")
 print("Enter nodes one at a time.")
 print("Each should be a series of integers (other nodes this node connects to) separated by commas. Press enter between nodes.\n")
@@ -91,6 +103,8 @@ if(nextInput == "Y" or nextInput == "y"):
 print("Your finished graph: ")
 graph.printGraph()
 
+'''
+
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN BFS ==============================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,6 +124,17 @@ graph.printGraph()
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN DFS ==============================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#dfs(graph, target, startingNode) -> can start at any node, arbitrarily choosing 0
+
+# one index for each node in graph, all start as False because no one has been visited yet 
+# declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
+visited = [False for i in range(len(graph.getGraph()))]
+print("Result: ", dfs(graph.getGraph(), visited, 7, 0), "\n")
+
+# reset visited array for new search
+visited = [False for i in range(len(graph.getGraph()))]
+print("Result: ", dfs(graph.getGraph(), visited, 4, 0))
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # OUTPUT RESULTS (DFS) =================================================================================================================================

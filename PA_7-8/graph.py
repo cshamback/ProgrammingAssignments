@@ -33,3 +33,8 @@ class Graph:
 
     def getGraph(self):
         return self.graph
+    
+    # testing purposes only 
+    # allows us to avoid the UI loops 
+    def setGraph(self, graphVals):
+        self.graph = graphVals
