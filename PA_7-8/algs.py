@@ -2,6 +2,20 @@
 # BFS (PA-7) ===========================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# OVERVIEW
+#   Closest vertices visited first - "level by level"
+#   Begin with any node. Traverse all adjacent nodes, then all nodes adjacent to those 
+
+# data = graph to be searched
+# visited = array of booleans; represents which nodes have been visited already
+# target = integer (node ID) to look for 
+# currentNode = ID of node being searched (integer, not the actual node)
+# return value: path from starting point to target value 
+
+def bfs(data, visited, target, currentNode):
+
+    pass
+
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # DFS (PA-8) ===========================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------

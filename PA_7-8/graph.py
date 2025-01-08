@@ -38,3 +38,25 @@ class Graph:
     # allows us to avoid the UI loops 
     def setGraph(self, graphVals):
         self.graph = graphVals
+
+# used in BFS (instead of recursion/stack used by DFS)
+class Queue: 
+
+    # a queue is a LIFO list 
+    def __init__(self):
+        self.queue = []
+
+    # add value to end of queue 
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    # delete first item in queue and return its value
+    def dequeue(self):
+        value = self.queue[0]
+        self.queue.remove(value) # remove first occurrence of value (will be at index 0)
+
+        return value
+
+    # get queue as list 
+    def getList(self):
+        return self.queue 
