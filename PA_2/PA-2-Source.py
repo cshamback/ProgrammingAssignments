@@ -1,25 +1,37 @@
 from csvGen import * 
 from mergeSort import * 
 
-# DEMO - delete later
-data = [1, 2, 4, 6, 7, 3, 9, 5, 10, 8, 5645645, 645654, 4343, 23423, -2, -5, 0]
-print("Old data: ", data)
-print("New data: ", mergeSort(0, int(len(data)), data))
 
 # ------------------------------------------------------------------------
 # PREMADE ARRAYS =========================================================
 # ------------------------------------------------------------------------
 
 # fill out 9 arrays (might want to )
+# 
 # merge sort each row, get data (2D array, used for csv input)
-# put into csv 
 
 # ------------------------------------------------------------------------
-# UI =====================================================================
+# UI SECTION =====================================================================
 # ------------------------------------------------------------------------
 
-# tell user they can input a number 1 ... 9 and press any other key to escape 
-# input while loop 
+# Step 1 - tell user they can input a number 1 ... 9 and press any other key to escape 
+# Stage 1 - A very basic input prompt to serve as a skeleton. Likely overcomplicated it...
+"""userInput = input("Input a number between 1 and 9 [inclusive]. Enter any other value or key to escape. ")
+if userInput.isnumeric() == True:
+    print("PASS")
+    x = int(userInput)
+    if x >= 1 and x <= 9:
+        print("PASS")
 
-# display Array_i 
-# display Sorted_Array_i
+else:
+    print("Bye!")
+
+"""
+# Components of loop
+#   Step 1 - Create an array
+#   Step 2 - Fill array with random numbers
+#   Step 3 - Put in csv
+#   Step 4 - Repeat 8 more times
+# Step 3 - Have the user enter a number from 1 - 9 inclusive (I guess done). At the same time, sort the inputted index.
+# Step 4 - display Array_i 
+# Step 5 - display Sorted_Array_i

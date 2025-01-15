@@ -1,3 +1,4 @@
+import random
 # merges 2 subarrays, arr1 and arr2 (used in mergeSort() below)
 
 # l and r are the beginning and ending indices of the merge region
@@ -5,8 +6,8 @@
 def merge(arr1, arr2):
     result = []
 
-    i = 0 # tracks arr1
-    k = 0 # tracks arr2
+    i = 0 # tracks arr1 (Left)
+    k = 0 # tracks arr2 (Right)
 
     # iterate through arr1 and arr2 at the same time
     # one at a time, pick the smaller of the two items currently being looked at
@@ -39,6 +40,8 @@ def merge(arr1, arr2):
             k = k + 1
 
     return result
+# Sanity Check 1 - This function does indeed work as intended
+
 
 # merge portion of array - overload 
 # l and r are start and end points of subarrays inside data 
@@ -63,3 +66,9 @@ def mergeSort(l, r, data):
         return merge(left, right) # merge left and right subarrays 
     else:
         return []
+    
+# Sanity Check 1 - Function does work as intended
+
+def randomNumberFill(least, greatest):
+    submit = random.randint(least,greatest)
+    return submit

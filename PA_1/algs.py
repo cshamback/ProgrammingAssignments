@@ -82,3 +82,20 @@ def euclidV1(pair):
 
 # second Euclidean algorithm 
 # def euclidV2(pair):
+
+#This is an idea, but I'm pretty sure you can perform this algorithm recursively, given what I've seen so far.
+# num1 = pair[0]
+# num2 = pair[1]
+# 
+#This returns num1 because when by the time this runs for the second time, num2 would be the new num1. Additionally, this is 
+#also where the algorithm would stop, when num2 is 0, indicating that num1 can't be divided anymore. (Something like that)
+#Ideally, num1 would be the GCD
+#   if (num2 == 0): 
+#       return num1
+# 
+# When the program confirms that num2 is 0, it takes the modulus of num1 and num2 and recursively performs the algorithm
+# return euclidV2(num2, num1 % num2)
+#
+# not sure if this will work but worth a try
+#
+#
