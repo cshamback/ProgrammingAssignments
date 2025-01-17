@@ -16,6 +16,7 @@ from mergeSort import *
 
 # Step 1 - tell user they can input a number 1 ... 9 and press any other key to escape 
 # Stage 1 - A very basic input prompt to serve as a skeleton. Likely overcomplicated it...
+
 #This big array would hold all our arrays and make interacting with the user much easier.
 bigArray = []
 #Because arrays start at index 0, we have to make it repeat this 8 times to get our 9 arrays.
@@ -47,11 +48,9 @@ if userInput.isnumeric() == True:
 #This is for when the user doesn't type in a number at all
 else:
     print("Invalid key pressed. Escaping...")
+
 # Components of loop
-#   Step 1 - Create an array
-#   Step 2 - Fill array with random numbers
-#   Step 3 - Put in csv
-#   Step 4 - Repeat 8 more times
-# Step 3 - Have the user enter a number from 1 - 9 inclusive (I guess done). At the same time, sort the inputted index.
-# Step 4 - display Array_i 
-# Step 5 - display Sorted_Array_i
+#   Step 1 - Create an array [Done]
+#   Step 2 - Fill array with random numbers [Done]
+#   Step 3 - Put in csv [NOT Done]
+#   Step 4 - Repeat 8 more times [Done?]
