@@ -29,25 +29,23 @@ for instance in range (8):
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray)   
 
-userInput = input("Input a number between 0 and 8 [inclusive]. Enter any other value or key to escape. ")
-if userInput.isnumeric() == True:
-    #Had to force the user's input to become a string. It would've stayed as a char otherwise.
-    x = int(userInput)
-    #Checks if the inputted number is between 1 and 9
-    if x >= 1 and x <= 9:
-        print(f"There are {len(bigArray[x])} elements in Array_{x}")
-        #Displays the array before it was sorted
-        print(f"Displaying Array_ {x}")
-        print(bigArray[x])
-        #Displays the array after it was sorted
-        print(f"Displaying sorted Array_{x}")
-        print(mergeSort(0,len(bigArray[x]),bigArray[x]))
-    #This is for the edge case that user types in a number that isn't between 1 and 9
-    else:
-        print("Invalid key pressed. Escaping...")
-#This is for when the user doesn't type in a number at all
-else:
-    print("Invalid key pressed. Escaping...")
+while True:
+    try:
+        x = int(input("Select a number from 1 to 9 inclusive. "))
+        if(x > 0 and x < 10):
+            print(f"There are {len(bigArray[x])} elements in Array_{x}")
+            #Displays the array before it was sorted
+            print(f"Displaying Array_ {x}")
+            print(bigArray[x])
+            #Displays the array after it was sorted
+            print(f"Displaying sorted Array_{x}")
+            print(mergeSort(0,len(bigArray[x]),bigArray[x]))
+            break
+        else:
+            print("Try again")     
+    except ValueError:
+        print("Try again")
+        break
 
 # Components of loop
 #   Step 1 - Create an array [Done]
