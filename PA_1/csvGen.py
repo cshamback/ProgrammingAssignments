@@ -46,6 +46,7 @@ def formatData(data, headingRow):
 # data is a 1D array representing the last column (time) of the results csv.
 
 def getStats(data):
+    data.sort()
     median = data[len(data) // 2][3] # floor division to find the "middle" of the array
 
     total = 0.0
