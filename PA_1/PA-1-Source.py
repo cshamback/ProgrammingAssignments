@@ -125,3 +125,32 @@ print("euclid done!")
 # --------------------------------------------------------
 # CONCLUSIONS.TXT ========================================
 # --------------------------------------------------------
+def conclusions(old_results, new_results): # calculates the improvement
+    count = 0
+    total_time_saved = 0.0
+
+    for i in range(len(old_results)):
+        old_time = float(old_results[i][3])
+        new_time = float(new_results[i][3])
+        if new_time < old_time:
+            count += 1
+            total_time_saved += (old_time - new_time)
+
+    avg_time_saved = total_time_saved / count if count > 0 else 0
+    return count, f"{avg_time_saved:.6f}"
+
+with open("Conclusions.txt", "w") as file:
+    x1, xx1 = conclusions(bfResultsV1, bfResultsV2)
+    x2, xx2 = conclusions(bfResultsV1, oeResults)
+    x3, xx3 = conclusions(bfResultsV2, oeResults)
+    x4, xx4 = conclusions(oeResults, seResults)
+    x5, xx5 = conclusions(bfResultsV1, seResults)
+    x6, xx6 = conclusions(bfResultsV2, seResults)
+
+    file.write(f"(1) Out of 1,000 pairs of integers, brute-force (v2) outperformed brute-force (v1) in {x1} pairs; and the average saved time for these {x1} pairs of integers was {xx1} milliseconds.\n")
+    file.write(f"(2) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v1) in {x2} pairs; and the average saved time for these {x2} pairs of integers was {xx2} milliseconds.\n")
+    file.write(f"(3) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v2) in {x3} pairs; and the average saved time for these {x3} pairs of integers was {xx3} milliseconds.\n")
+    file.write(f"(4) Out of 1,000 pairs of integers, the second version of Euclid outperformed the original version of Euclid in {x4} pairs; and the average saved time for these {x4} pairs of integers was {xx4} milliseconds.\n")
+    file.write(f"(5) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v1) in {x5} pairs; and the average saved time for these {x5} pairs of integers was {xx5} milliseconds.\n")
+    file.write(f"(6) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v2) in {x6} pairs; and the average saved time for these {x6} pairs of integers was {xx6} milliseconds.\n")
+print("Conclusions.txt generated!")
