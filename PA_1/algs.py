@@ -112,4 +112,4 @@ def euclidV2(pair):
         a = b
         b = remainder
     #it returns a becase that's where the GCD will be stored
-    return a
+    return a #isthisworking
