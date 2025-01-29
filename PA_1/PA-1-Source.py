@@ -90,7 +90,7 @@ for i in range(0, len(pairs)): # iterate through rows
     oeResults[i] = [str(pairs[i][0]), str(pairs[i][1]), str(gcd), str((newTime - currentTime).total_seconds() * 1000)]
 
 # run euclid v2
-print("euclid v1...")
+print("euclid v2...")
 for i in range(0, len(pairs)): # iterate through rows 
     currentTime = datetime.now()
     gcd = euclidV2(pairs[i])
