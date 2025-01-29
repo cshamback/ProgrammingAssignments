@@ -4,4 +4,5 @@
 Spreadsheets were generated programmatically in the csvgen() method.
 
 # Group member contribution
+Liem Chau: xxx% (Liem Chau)
 Cody Shamback: xxx% (Cody Shamback)
