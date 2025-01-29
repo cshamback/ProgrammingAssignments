@@ -29,6 +29,7 @@ for instance in range (8):
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray)   
 
+#this while operation allows multiple instances of this without needing to restart the program
 while True:
     try:
         x = int(input("Select a number from 1 to 9 inclusive. "))
