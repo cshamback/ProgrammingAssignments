@@ -111,5 +111,5 @@ def euclidV2(pair):
         # reassign values for the next cycle in the while loop
         a = b
         b = remainder
-    #it returns a becase that's where the GCD will be stored
+    #it returns a becase that's where the GCD will be stored. b contains the remainder, or lack thereof
     return a
