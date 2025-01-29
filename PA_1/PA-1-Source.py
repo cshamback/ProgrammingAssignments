@@ -90,29 +90,35 @@ for i in range(0, len(pairs)): # iterate through rows
     oeResults[i] = [str(pairs[i][0]), str(pairs[i][1]), str(gcd), str((newTime - currentTime).total_seconds() * 1000)]
 
 # run euclid v2
+print("euclid v1...")
+for i in range(0, len(pairs)): # iterate through rows 
+    currentTime = datetime.now()
+    gcd = euclidV2(pairs[i])
+    newTime = datetime.now()
 
+    seResults[i] = [str(pairs[i][0]), str(pairs[i][1]), str(gcd), str((newTime - currentTime).total_seconds() * 1000)]
 # generate results spreadsheet for v1 and v2
 
 print("formatting data and getting results...")
 formatData(oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
-# formatData(seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
+formatData(seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
 csvGen("OE_Results", oeResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
-# csvGen("SE_Results", seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
+csvGen("SE_Results", seResults, ["Number One", "Number Two", "Their GCD", "Time Spent (Milliseconds)"])
 
 # generate statistics spreadsheet for v1 and v2
 
 # returns 2D array with max/min/average/median
 oeStats = getStats(oeResults)
-#seStats = getStats(seResults)
+seStats = getStats(seResults)
 
 # formats that data 
 formatData(oeStats, ["Statistics", "Milliseconds"])
-#formatData(seResults, ["Statistics", "Milliseconds"])
+formatData(seResults, ["Statistics", "Milliseconds"])
 
 # generates csv 
 csvGen("OE_Statistics", oeStats, ["Statistics", " Milliseconds"])
-# csvGen("SE_Statistics", seStats, ["Statistics", " Milliseconds"])
+csvGen("SE_Statistics", seStats, ["Statistics", " Milliseconds"])
 
 print("euclid done!")
 
