@@ -36,7 +36,7 @@ while True:
         if(x > 0 and x < 10):
             print(f"There are {len(bigArray[x])} elements in Array_{x}")
             #Displays the array before it was sorted
-            print(f"Displaying Array_ {x}")
+            print(f"Displaying Array_{x}")
             print(bigArray[x])
             #Displays the array after it was sorted
             print(f"Displaying sorted Array_{x}")
