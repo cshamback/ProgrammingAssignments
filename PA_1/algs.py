@@ -81,21 +81,35 @@ def euclidV1(pair):
     return prevR
 
 # second Euclidean algorithm 
-# def euclidV2(pair):
+def euclidV2(pair):
+    #inputs
+    a = 0
+    b = 0
+    num1 = pair[0]
+    num2 = pair[1]
+    #none because it is an absent value
+    remainder = None
 
-#This is an idea, but I'm pretty sure you can perform this algorithm recursively, given what I've seen so far.
-# num1 = pair[0]
-# num2 = pair[1]
-# 
-#This returns num1 because when by the time this runs for the second time, num2 would be the new num1. Additionally, this is 
-#also where the algorithm would stop, when num2 is 0, indicating that num1 can't be divided anymore. (Something like that)
-#Ideally, num1 would be the GCD
-#   if (num2 == 0): 
-#       return num1
-# 
-# When the program confirms that num2 is 0, it takes the modulus of num1 and num2 and recursively performs the algorithm
-# return euclidV2(num2, num1 % num2)
-#
-# not sure if this will work but worth a try
-#
-#
+    # ensures proper placement before the while operation begins. 
+    if num1 > num2:
+        a = num1
+        b = num2
+    else:
+        a = num2
+        b = num1
+
+    while(remainder != 0):
+        remainder = a - b
+        if(remainder >= b):  #meaning quotient > 1
+            remainder = remainder - b 
+            if(remainder >= b): #meaning quotient > 2
+                remainder = remainder - b
+                if(remainder >= b): #meaning quotient > 3
+                    # floor division operation
+                    q = a // b
+                    remainder = a - (b * q)
+        # reassign values for the next cycle in the while loop
+        a = b
+        b = remainder
+
+    return a
