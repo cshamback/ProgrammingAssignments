@@ -5,24 +5,21 @@ import math
 def csvGen(fileName, data):
     # Places the csv file in output with an appropriate name.
     with open("PA_2/output/" + fileName + '.csv', 'w') as file:
-        #This part of code deals with headers
+        # header row/titles 
         fieldnames = ["Input Size ", " Value of n *log(n) ", " Time Spent (Milliseconds) ", " Value of n * log(n) / Time "]
-        heading = csv.DictWriter(file,fieldnames= fieldnames ,delimiter= ',')
-        heading.writeheader()
 
-        #The gap in this matters
-        csvWriter = csv.writer(file, delimiter= ',')
-        csvWriter.writerow(data[0:]) 
-
-
-#Test spreadsheet making
-csvGen("Testing",[1,2,3,4])
+        writer = csv.writer(file) # create writer object 
+        writer.writerow(fieldnames) # write a single row for the headers
+        writer.writerows(data[0:]) # write the data into more rows 
 
 # ------------------------------------------------------------------------
 # STATS ==================================================================
 # ------------------------------------------------------------------------
 
 def nLogn(n):
+    if(n <= 0):
+        print(f"ERROR: n of {n} is invalid for log(n).")
+        return 0
     return float(float(n) * math.log(n))
 
 # returns a single row of of the spreadsheet generated for output 

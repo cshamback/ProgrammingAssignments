@@ -1,6 +1,8 @@
 from csvGen import * 
 from mergeSort import * 
 
+import time
+
 # ------------------------------------------------------------------------
 # PREMADE ARRAYS =========================================================
 # ------------------------------------------------------------------------
@@ -21,7 +23,32 @@ for instance in range (9):
     bigArray.append(subArray) 
 
 # ------------------------------------------------------------------------
-# UI SECTION =====================================================================
+# SPREADSHEET SECTION ====================================================
+# ------------------------------------------------------------------------
+
+spreadsheetList = [[] for _ in range(9)] # one row per array, all start empty
+
+# merge sort all 9 arrays
+i = 0
+for list in bigArray: 
+    # merge sort each array and get the time elapsed 
+    startTime = time.time()
+    mergeSort(0, len(list), list)
+    endTime = time.time()
+
+    elapsedTime = endTime - startTime
+
+    #print(f"startTime: {startTime}, endTime: {endTime}, elapsedTime: {elapsedTime}")
+
+    # generate the current row in the spreadsheet 
+    spreadsheetList[i] = getStats(list, elapsedTime)
+    i = i + 1
+
+# export spreadsheet as .csv file
+csvGen("Mergesort_Time", spreadsheetList)
+
+# ------------------------------------------------------------------------
+# UI SECTION =============================================================
 # ------------------------------------------------------------------------
 
 # Step 1 - tell user they can input a number 1 ... 9 and press any other key to escape   
