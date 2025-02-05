@@ -42,7 +42,6 @@ def merge(arr1, arr2):
     return result
 # Sanity Check 1 - This function does indeed work as intended
 
-
 # merge portion of array - overload 
 # l and r are start and end points of subarrays inside data 
 def mergeSort(l, r, data): 
