@@ -4,13 +4,16 @@ import math
 #All this does is generate a simple spreadsheet (Formatting is TBD)
 def csvGen(fileName, data):
     # Places the csv file in output with an appropriate name.
-    with open("PA_2/output/" + fileName + '.csv', 'w') as file:
+    with open("PA_2/output/" + fileName + '.csv', 'w', newline=' ') as file: 
         # header row/titles 
         fieldnames = ["Input Size ", " Value of n *log(n) ", " Time Spent (Milliseconds) ", " Value of n * log(n) / Time "]
 
         writer = csv.writer(file) # create writer object 
         writer.writerow(fieldnames) # write a single row for the headers
-        writer.writerows(data[0:]) # write the data into more rows 
+
+        # Ensures proper number formatting in rows
+        formatted_data = [[f"{x}", f"{y:.6f}", f"{z:.6f}", f"{w:.6e}"] for x, y, z, w in data]
+        writer.writerows(formatted_data) # write the data into more rows and keeps it formatted
 
 # ------------------------------------------------------------------------
 # STATS ==================================================================
@@ -28,7 +31,12 @@ def nLogn(n):
 def getStats(arr, timeSpent):
 
     timeComplexity = nLogn(len(arr))
-    timeComplexityScaled = float((timeComplexity) / timeSpent)
+
+    # Just makes sure we don't divide by zero
+    if timeSpent == 0:
+        timeComplexityScaled = 0
+    else:
+        timeComplexityScaled = float((timeComplexity) / timeSpent)
 
     # return the row. all are floats/ints except for timeComplexityScaled, which is a string in scientific notation
     result = [len(arr), timeComplexity, timeSpent, format(timeComplexityScaled, 'e')]
