@@ -33,8 +33,7 @@ while True:
         x = x - 1 # allow for 0 indexing while also letting user pick 1...9
     
         if(x >= 0 and x < 9): # x can be 0-8, for indexes in bigArray
-
-            print(f"There are {len(bigArray[x])} elements in Array_{x}")
+            print(f"There are {len(bigArray[x])} elements in Array_{x + 1}")
  
             #Displays the array before it was sorted
             print(f"Displaying Array_{x + 1}")
