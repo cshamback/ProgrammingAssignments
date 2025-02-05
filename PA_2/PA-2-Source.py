@@ -29,9 +29,8 @@ for instance in range (9):
 #this while operation allows multiple instances of this without needing to restart the program
 while True:
     try:
-        x = int(input("Select a number from 1 to 9 inclusive."))
+        x = int(input("Select a number from 1 to 9 inclusive. Or you can type 'EXIT' to leave. "))
         x = x - 1 # allow for 0 indexing while also letting user pick 1...9
-        print(f"bigArray contains {len(bigArray)} elements. x = {x}")
     
         if(x >= 0 and x < 9): # x can be 0-8, for indexes in bigArray
             print(f"There are {len(bigArray[x])} elements in Array_{x}")
@@ -46,7 +45,7 @@ while True:
         else:
             print("Try again")     
     except ValueError:
-        print("Try again")
+        print("Exiting...")
         break
 
 # Components of loop
