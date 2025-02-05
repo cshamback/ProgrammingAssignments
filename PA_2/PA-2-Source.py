@@ -15,7 +15,7 @@ for instance in range (9):
     subArray = []
 
     #Fills the array with up to 20 elements. It can be any number, I just did 20 so my computer won't die.
-    for i in range(randomNumberFill(1,20)):
+    for i in range(instance * 1000):
         #The values of said elements are between 1 and 99
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray) 
