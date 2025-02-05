@@ -20,11 +20,11 @@ from mergeSort import *
 #This big array would hold all our arrays and make interacting with the user much easier.
 bigArray = []
 #Because arrays start at index 0, we have to make it repeat this 8 times to get our 9 arrays.
-for instance in range (8):
+for instance in range (9):
     #Create a sub array so that we can append to the big array to get our 9 different arrays.
     subArray = []
     #Fills the array with up to 20 elements. It can be any number, I just did 20 so my computer won't die.
-    for i in range(randomNumberFill(1,20)):
+    for i in range(instance * 1000):
         #The values of said elements are between 1 and 99
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray)   
