@@ -1,6 +1,8 @@
 from csvGen import * 
 from mergeSort import * 
+
 import time
+
 # ------------------------------------------------------------------------
 # PREMADE ARRAYS =========================================================
 # ------------------------------------------------------------------------
@@ -20,19 +22,29 @@ for instance in range (10):
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray) 
 # ------------------------------------------------------------------------
-# SORT SECTION =============================================================
+# SPREADSHEET SECTION ====================================================
 # ------------------------------------------------------------------------
-# Iterates through every element in the bigArray array
-for list in bigArray:
-    #starts recording the time
-    start = time.time()
-    # Sorting the current element using merge sort
-    mergeSort(0,len(list),list)
-    # Stops recording the time and subtracts from the start to get the elapsed time
-    end = time.time()
-    elapsed = end - start
-    # prints out the elapsed time
-    print("%.10f" % elapsed)
+
+spreadsheetList = [[] for _ in range(9)] # one row per array, all start empty
+
+# merge sort all 9 arrays
+i = 0
+for list in bigArray: 
+    # merge sort each array and get the time elapsed 
+    startTime = time.time()
+    mergeSort(0, len(list), list)
+    endTime = time.time()
+
+    elapsedTime = endTime - startTime
+
+    #print(f"startTime: {startTime}, endTime: {endTime}, elapsedTime: {elapsedTime}")
+
+    # generate the current row in the spreadsheet 
+    spreadsheetList[i] = getStats(list, elapsedTime)
+    i = i + 1
+
+# export spreadsheet as .csv file
+csvGen("Mergesort_Time", spreadsheetList)
 # ------------------------------------------------------------------------
 # UI SECTION =============================================================
 # ------------------------------------------------------------------------
