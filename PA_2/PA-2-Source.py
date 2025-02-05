@@ -32,7 +32,7 @@ for instance in range (9):
 #this while operation allows multiple instances of this without needing to restart the program
 while True:
     try:
-        x = int(input("Select a number from 1 to 9 inclusive. "))
+        x = int(input("Select a number from 1 to 9 inclusive. Or you can type 'EXIT' to leave. "))
         if(x > 0 and x < 10):
             print(f"There are {len(bigArray[x])} elements in Array_{x}")
             #Displays the array before it was sorted
@@ -41,11 +41,10 @@ while True:
             #Displays the array after it was sorted
             print(f"Displaying sorted Array_{x}")
             print(mergeSort(0,len(bigArray[x]),bigArray[x]))
-            break
         else:
             print("Try again")     
     except ValueError:
-        print("Try again")
+        print("Exiting...")
         break
 
 # Components of loop
