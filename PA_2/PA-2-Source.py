@@ -12,15 +12,16 @@ import time
 bigArray = []
 
 #Because arrays start at index 0, we have to make it repeat this 8 times to get our 9 arrays.
-for instance in range (10):
+for instance in range (9):
     #Create a sub array so that we can append to the big array to get our 9 different arrays.
     subArray = []
 
     #Fills the array with up to 20 elements. It can be any number, I just did 20 so my computer won't die.
-    for i in range(instance * 1):
+    for i in range(instance * 1000):
         #The values of said elements are between 1 and 99
         subArray.append(randomNumberFill(1,99))
     bigArray.append(subArray) 
+
 # ------------------------------------------------------------------------
 # SPREADSHEET SECTION ====================================================
 # ------------------------------------------------------------------------
@@ -45,6 +46,7 @@ for list in bigArray:
 
 # export spreadsheet as .csv file
 csvGen("Mergesort_Time", spreadsheetList)
+
 # ------------------------------------------------------------------------
 # UI SECTION =============================================================
 # ------------------------------------------------------------------------
@@ -54,24 +56,22 @@ csvGen("Mergesort_Time", spreadsheetList)
 #this while operation allows multiple instances of this without needing to restart the program
 while True:
     try:
-        # User selects an array to see
-        SelectedArray = int(input("Select a number from 1 to 9 inclusive. Or you can type 'EXIT' to leave. "))
+        x = int(input("Select a number from 1 to 9 inclusive. Or you can type 'EXIT' to leave. "))
+        x = x - 1 # allow for 0 indexing while also letting user pick 1...9
     
-        if(SelectedArray > 0 and SelectedArray <= 9): # x can be 0-8, for indexes in bigArray
-            print(f"There are {len(bigArray[SelectedArray])} elements in Array_{SelectedArray}")
+        if(x >= 0 and x < 9): # x can be 0-8, for indexes in bigArray
+            print(f"There are {len(bigArray[x])} elements in Array_{x + 1}")
  
             #Displays the array before it was sorted
-            print(f"Displaying Array_{SelectedArray}")
-            print(bigArray[SelectedArray])
+            print(f"Displaying Array_{x + 1}")
+            print(bigArray[x])
 
             #Displays the array after it was sorted
-            print(f"Displaying sorted Array_{SelectedArray}")
-            print(mergeSort(0,len(bigArray[SelectedArray])),bigArray[SelectedArray])
+            print(f"Displaying sorted Array_{x + 1}")
+            print(mergeSort(0,len(bigArray[x]),bigArray[x]))
         else:
-            # Just in case the user's input is out of the range
             print("Try again")     
     except ValueError:
-        # In case the user types anything that isn't an integer 
         print("Exiting...")
         break
 
