@@ -12,16 +12,10 @@ import time
 bigArray = []
 
 #Because arrays start at index 0, we have to make it repeat this 8 times to get our 9 arrays.
-for instance in range (1,10):
+for i in range (1,10):
     #Create a sub array so that we can append to the big array to get our 9 different arrays.
-    subArray = [randomNumberFill(1,99) for _ in range(instance * 1000)]
+    subArray = [randomNumberFill(1,99) for _ in range(i * 1000)]
     bigArray.append(subArray)
-
-    #Fills the array with up to 20 elements. It can be any number, I just did 20 so my computer won't die.
-    for i in range(instance * 1000):
-        #The values of said elements are between 1 and 99
-        subArray.append(randomNumberFill(1,99))
-    bigArray.append(subArray) 
 
 # ------------------------------------------------------------------------
 # SPREADSHEET SECTION ====================================================
@@ -30,7 +24,7 @@ for instance in range (1,10):
 spreadsheetList = [] # one row per array, all start empty
 
 # merge sort all 9 arrays
-for i, sublist in enumerate(bigArray): 
+for i, sublist in enumerate(bigArray[:9]): 
     # merge sort each array and get the time elapsed 
     startTime = time.time()
     mergeSort(0, len(sublist) - 1, sublist)
