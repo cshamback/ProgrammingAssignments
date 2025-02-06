@@ -12,9 +12,10 @@ import time
 bigArray = []
 
 #Because arrays start at index 0, we have to make it repeat this 8 times to get our 9 arrays.
-for instance in range (9):
+for instance in range (1,10):
     #Create a sub array so that we can append to the big array to get our 9 different arrays.
-    subArray = []
+    subArray = [randomNumberFill(1,99) for _ in range(instance * 1000)]
+    bigArray.append(subArray)
 
     #Fills the array with up to 20 elements. It can be any number, I just did 20 so my computer won't die.
     for i in range(instance * 1000):
@@ -26,14 +27,13 @@ for instance in range (9):
 # SPREADSHEET SECTION ====================================================
 # ------------------------------------------------------------------------
 
-spreadsheetList = [[] for _ in range(9)] # one row per array, all start empty
+spreadsheetList = [] # one row per array, all start empty
 
 # merge sort all 9 arrays
-i = 0
-for list in bigArray: 
+for i, sublist in enumerate(bigArray): 
     # merge sort each array and get the time elapsed 
     startTime = time.time()
-    mergeSort(0, len(list), list)
+    mergeSort(0, len(sublist) - 1, sublist)
     endTime = time.time()
 
     elapsedTime = endTime - startTime
@@ -41,8 +41,7 @@ for list in bigArray:
     #print(f"startTime: {startTime}, endTime: {endTime}, elapsedTime: {elapsedTime}")
 
     # generate the current row in the spreadsheet 
-    spreadsheetList[i] = getStats(list, elapsedTime)
-    i = i + 1
+    spreadsheetList.append(getStats(sublist, elapsedTime))
 
 # export spreadsheet as .csv file
 csvGen("Mergesort_Time", spreadsheetList)
@@ -67,8 +66,9 @@ while True:
             print(bigArray[x])
 
             #Displays the array after it was sorted
+            sorted_array = mergeSort(0, len(bigArray[x]) - 1, bigArray[x][:])
             print(f"Displaying sorted Array_{x + 1}")
-            print(mergeSort(0,len(bigArray[x]),bigArray[x]))
+            print(sorted_array)
         else:
             print("Try again")     
     except ValueError:
