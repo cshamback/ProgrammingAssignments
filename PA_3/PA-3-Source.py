@@ -1,16 +1,22 @@
-#Recursion
-def Fib(count):
-    previous_term = 1
-    current_term = 0
-    next_term = 0
+from Testing_PlayGround import *
+from csvGen import *
+import time
 
-    for i in range(count):
-        next_term = current_term + previous_term
-        current_term = previous_term
-        previous_term = next_term   
-    return current_term
-
-for i in range(10):
-    print(Fib(i))
-
-#First Iteration/Attempt at a fibonacci sequence, it works. All that's left is to make this recursive.
+recordToSpreadsheet = []
+while True:
+    try:
+        answer = int(input("Select 1 for Dynamic Programming Fibonacci and select 2 for Recursive Fibonacci. Or press anything else to quit. "))
+        if(answer == 1):
+            Limit = int(input("Give me the input of n. "))
+            x = dynamicFib(Limit-1)
+            recordToSpreadsheet.append(statistics(Limit,x,recursiveCalculations(Limit-1), dynamicCalculations(Limit-1),scaledItems(Limit-1),aggregateTime(Limit-1)))
+            generateCsv("Test1", recordToSpreadsheet)
+        elif(answer == 2):
+            Limit = int(input("Give me the input of n. "))
+            for i in range(Limit):
+                print(recursiveFib(i))
+            print("Recursion Complete") 
+        else:
+            print("Pick 1 or 2.")   
+    except ValueError:
+        break
