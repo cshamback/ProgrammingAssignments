@@ -9,16 +9,20 @@
 import time
 import math
 def recursiveFib(n):
-    # base case: fib(0) is 1 and fib(1) is 1
-    if(n <= 1):
+    # base case: fib(0) is 0, fib(1) and fib(2) 1
+    if(n == 0):
+        return 0
+    if(n <= 2):
         return 1
         
     # otherwise, fib(n) is the sum of the two previous values 
     return recursiveFib(n - 1) + recursiveFib(n - 2)
     
 def dynamicFib(n):
-    # base case: fib(0) and fib(1) are both 1
-    if(n <= 1):
+    # base case: fib(0) is 0, fib(1) and fib(2) are 1
+    if(n == 0):
+        return 0
+    if(n <= 2):
         return 1
         
     # dict stores all fib(n) found so far 
@@ -42,22 +46,32 @@ def dynamicFib(n):
             
     return memo[n] # get nth fibonacci number from dict 
 
+# get amount of time it takes to do dynamic fibonacci 
 def dynamicCalculations(Limit):
     startTimeD = time.time()
-    x = dynamicFib(Limit-1)
+    x = dynamicFib(Limit)
     endTimeD = time.time()
     elapsedTimeD = endTimeD - startTimeD
     return elapsedTimeD
 
+# get amount of time it takes to do recursive fibonacci 
 def recursiveCalculations(Limit):
     startTimeR = time.time()
-    x = recursiveFib(Limit-1)
+    x = recursiveFib(Limit)
     endTimeR = time.time()
     elapsedTimeR = endTimeR - startTimeR
     return elapsedTimeR
 
+# get recursive time / dynamic time -> "how much faster is dynamic than recursive alg"
+# ie. if recursive = 3 and dynamic = 1, 3/1 = 3 so dynamic is 3x faster
+
 def aggregateTime(Limit):
-    result = float(recursiveCalculations(Limit)/dynamicCalculations(Limit))
+    # temporary solution: if we are going to divide by 0, don't
+    # assume that if one dynamic calculation time is 0 it's because n is very low, so both are 0. 
+    if(dynamicCalculations(Limit) == 0):
+        result = 0
+    else: 
+        result = float(recursiveCalculations(Limit)/dynamicCalculations(Limit))
     return result 
 
 def scaledItems(n):
