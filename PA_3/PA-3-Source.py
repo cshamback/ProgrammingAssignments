@@ -6,7 +6,10 @@ recordToSpreadsheet = []
 #You're welcome Steve
 AllocationList = [10,12,15,20,23,25,30]
 for i in AllocationList:
-    recordToSpreadsheet.append(statistics(i,dynamicFib(i),recursiveCalculations(i), dynamicCalculations(i),scaledItems(i),aggregateTime(i)))
+    t1 = recursiveCalculations(i)
+    t2 = dynamicCalculations(i)
+    agTime = aggregateTime(t1, t2) # or agTime = t1 / t2
+    recordToSpreadsheet.append(statistics(i,dynamicFib(i),t1, t2,scaledItems(i),agTime))
 
 generateCsv("Test1", recordToSpreadsheet)
 

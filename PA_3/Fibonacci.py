@@ -58,16 +58,16 @@ def recursiveCalculations(Limit):
 # get recursive time / dynamic time -> "how much faster is dynamic than recursive alg"
 # ie. if recursive = 3 and dynamic = 1, 3/1 = 3 so dynamic is 3x faster
 
-def aggregateTime(Limit):
+def aggregateTime(L1, R2):
     # temporary solution: if we are going to divide by 0, don't
     # assume that if one dynamic calculation time is 0 it's because n is very low, so both are 0. 
     try:
-        result = float(recursiveCalculations(Limit)/dynamicCalculations(Limit))
+        result = float(recursiveCalculations(L1)/dynamicCalculations(R2))
 
-        print(recursiveCalculations(Limit), " / ", dynamicCalculations(Limit), " = ", result)
+        print(recursiveCalculations(L1), " / ", dynamicCalculations(R2), " = ", result)
         print()
     except ZeroDivisionError:
-        result = float('inf')
+        result = float('0.0')
     return result
         
 
