@@ -60,13 +60,12 @@ def recursiveCalculations(Limit):
 def aggregateTime(Limit):
     # temporary solution: if we are going to divide by 0, don't
     # assume that if one dynamic calculation time is 0 it's because n is very low, so both are 0. 
-    print(f"Recursive: {recursiveCalculations(Limit)}, Dynamic: {dynamicCalculations(Limit)}")
-
-    if((dynamicCalculations(Limit) == 0)):
-        result = 0
-    else: 
+    try:
         result = float(recursiveCalculations(Limit)/dynamicCalculations(Limit))
-    return result 
+    except ZeroDivisionError:
+        result = float('inf')
+    return result
+        
 
 def scaledItems(n):
     Result = float((math.pow(2,n)) / n)
