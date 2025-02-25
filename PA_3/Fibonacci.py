@@ -1,5 +1,6 @@
 import time
 import math
+
 def recursiveFib(n):
     # base case: fib(0) is 0, fib(1) and fib(2) 1
     if(n == 0):
@@ -62,6 +63,9 @@ def aggregateTime(Limit):
     # assume that if one dynamic calculation time is 0 it's because n is very low, so both are 0. 
     try:
         result = float(recursiveCalculations(Limit)/dynamicCalculations(Limit))
+
+        print(recursiveCalculations(Limit), " / ", dynamicCalculations(Limit), " = ", result)
+        print()
     except ZeroDivisionError:
         result = float('inf')
     return result

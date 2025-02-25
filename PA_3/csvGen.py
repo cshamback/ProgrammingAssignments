@@ -21,5 +21,5 @@ def generateCsv(filename, data):
 
 def statistics(n,Fn,Recursive, Dynamic, ScaledItems, AggregateTime):
     finalResult = [n, Fn, Recursive, Dynamic, ScaledItems, AggregateTime]
-    print(finalResult)
+    #print(finalResult)
     return finalResult
