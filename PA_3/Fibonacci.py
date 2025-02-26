@@ -41,17 +41,17 @@ def dynamicFib(n):
 
 # get amount of time it takes to do dynamic fibonacci 
 def dynamicCalculations(Limit):
-    startTimeD = time.time()
+    startTimeD = time.perf_counter()
     x = dynamicFib(Limit)
-    endTimeD = time.time()
+    endTimeD = time.perf_counter()
     elapsedTimeD = endTimeD - startTimeD
     return elapsedTimeD
 
 # get amount of time it takes to do recursive fibonacci 
 def recursiveCalculations(Limit):
-    startTimeR = time.time()
+    startTimeR = time.perf_counter()
     x = recursiveFib(Limit)
-    endTimeR = time.time()
+    endTimeR = time.perf_counter()
     elapsedTimeR = endTimeR - startTimeR
     return elapsedTimeR
 
@@ -62,12 +62,10 @@ def aggregateTime(L1, R2):
     # temporary solution: if we are going to divide by 0, don't
     # assume that if one dynamic calculation time is 0 it's because n is very low, so both are 0. 
     try:
-        result = float(recursiveCalculations(L1)/dynamicCalculations(R2))
-
-        print(recursiveCalculations(L1), " / ", dynamicCalculations(R2), " = ", result)
-        print()
+        result = float(L1/R2)
     except ZeroDivisionError:
-        result = float('0.0')
+        print("You messed up")
+        result = 0
     return result
         
 
