@@ -14,7 +14,7 @@ for i in AllocationList:
     agTime = aggregateTime(t1, t2) # or agTime = t1 / t2
     # Saves it in the array and then writes it to the spreadsheet in the next line
     recordToSpreadsheet.append(statistics(i,dynamicFib(i),t1, t2,scaledItems(i),agTime))
-generateCsv("Test1", recordToSpreadsheet)
+generateCsv("Fibonacci_Time", recordToSpreadsheet)
 
 
 # This allows the program to keep asking the user for an input

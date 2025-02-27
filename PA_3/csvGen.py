@@ -9,7 +9,7 @@ def generateCsv(filename, data):
         csv_writer = csv.writer(FibFile)
 
         #Field names specified in PA-3 sheet
-        fieldNames = ['n', 'F(n)', 'T1: Time spent on recursive algorithm', 'T2: Time spent on dynamic algorithm', 'Value of (2^n)/n', 'Value of T1/T2']
+        fieldNames = ['n', 'F(n)', 'T1: Time spent on recursive algorithm (Seconds)', 'T2: Time spent on dynamic algorithm (Seconds)', 'Value of (2^n)/n', 'Value of T1/T2 (Seconds)']
         #Write these field names into spreadsheet
         csv_writer.writerow(fieldNames)
 
