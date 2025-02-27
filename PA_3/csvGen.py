@@ -15,10 +15,10 @@ def generateCsv(filename, data):
 
         formats = [
             [
-             f"{int(a):>6}",
+             f"{int(a):>1}",
              f"{int(b):>10}", 
-             f"{c:>25.10f}", 
-             f"{d:>25.10f}", 
+             f"{c:>20.10f}", 
+             f"{d:>20.10f}", 
              f"{e:>20.5e}", 
              f"{f:>20.5e}"
              ]
