@@ -70,5 +70,9 @@ def aggregateTime(L1, R2):
         
 
 def scaledItems(n):
+    # Calculates the value of (2^n)/n
+    # We think this is best approach
     Result = float((math.pow(2,n)) / n)
+
+    #Returns the result as result
     return Result

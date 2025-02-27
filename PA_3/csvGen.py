@@ -14,11 +14,14 @@ def generateCsv(filename, data):
         csv_writer.writerow(fieldNames)
 
         formats = [
-            [f"{int(a)}", f"{int(b)}", f"{c:.10f}", f"{d:.10f}", f"{e:.10f}", f"{f:.10f}"]
+            [f"{int(a)}", f"{int(b)}", f"{c:.10f}", f"{d:.10f}", f"{e:.10e}", f"{f:.10e}"]
             for a,b,c,d,e,f in data
         ]
         csv_writer.writerows(formats)
 
+
+# All statistics would be formatted and returned in a way that other functions can take the final result as an input
+# to write to spreadsheet
 def statistics(n,Fn,Recursive, Dynamic, ScaledItems, AggregateTime):
     finalResult = [n, Fn, Recursive, Dynamic, ScaledItems, AggregateTime]
     #print(finalResult)
