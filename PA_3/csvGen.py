@@ -14,7 +14,14 @@ def generateCsv(filename, data):
         csv_writer.writerow(fieldNames)
 
         formats = [
-            [f"{int(a)}", f"{int(b)}", f"{c:.10f}", f"{d:.10f}", f"{e:.10e}", f"{f:.10e}"]
+            [
+             f"{int(a):>1}",
+             f"{int(b):>10}", 
+             f"{c:>20.10f}", 
+             f"{d:>20.10f}", 
+             f"{e:>20.5e}", 
+             f"{f:>20.5e}"
+             ]
             for a,b,c,d,e,f in data
         ]
         csv_writer.writerows(formats)
