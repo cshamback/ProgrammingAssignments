@@ -1,6 +1,8 @@
 import time
 import math
+from functools import cache
 
+@cache
 def recursiveFib(n):
     # base case: fib(0) is 0, fib(1) and fib(2) 1
     if(n == 0):
@@ -11,6 +13,7 @@ def recursiveFib(n):
     # otherwise, fib(n) is the sum of the two previous values 
     return recursiveFib(n - 1) + recursiveFib(n - 2)
     
+@cache
 def dynamicFib(n):
     # base case: fib(0) is 0, fib(1) and fib(2) are 1
     if(n == 0):
