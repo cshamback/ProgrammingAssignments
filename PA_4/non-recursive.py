@@ -3,7 +3,7 @@ import time
 def get_user_input():
     numSteps = 0 
     print("* * * * * * * * * * * * * * * * * * * *")
-    print("  P-A-4: D Y N A M I C  S T A I R S ")
+    print("  P-A-4:  S T A I R  C O U N T I N G ")
     print("* * * * * * * * * * * * * * * * * * * *")
 
     validInput = False 
