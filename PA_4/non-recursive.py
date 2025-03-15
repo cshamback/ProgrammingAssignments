@@ -1,5 +1,6 @@
 import time
-
+from functools import lru_cache
+Stops = []
 def get_user_input():
     numSteps = 0 
     print("* * * * * * * * * * * * * * * * * * * *")
@@ -30,6 +31,7 @@ def get_user_input():
             validInput = True
 
     print(f"Valid input accepted. Number of steps: {numSteps}, Leaps allowed: {stepsAllowed}\n")
+    Stops = stepsAllowed
     return numSteps, stepsAllowed
 
 def count_ways_dp(n, steps):
@@ -42,6 +44,22 @@ def count_ways_dp(n, steps):
                 dp[i] += dp[i - step]
     
     return dp[n]
+
+@lru_cache
+def count_ways_rc(n, steps):
+    #initial conditions of the recursion. Ideally, we'd use 1 and 2 but it can work on any number
+    # as long as it's not bigger than stepsStaircase
+    n1 = steps[0]
+    n2 = steps[1]
+    
+    # in case something inputs 0
+    if(n == 0):
+        return 1
+    if(n < 0):
+        return 0
+    
+    # recursion using the initial conditions
+    return count_ways_rc(n - n1, steps) + count_ways_rc(n - n2, steps)
 
 def generate_paths(n, steps, path=[], paths=[]):
     if n == 0:
@@ -58,15 +76,25 @@ def main():
     n, allowed_steps = get_user_input()
     allowed_steps.sort()
     
-    start_time = time.time()
+    start_time_dp = time.time()
     total_ways_dp = count_ways_dp(n, allowed_steps)
-    dp_time = time.time() - start_time
+    dp_time = time.time() - start_time_dp
     
     paths = generate_paths(n, allowed_steps, path=[], paths=[])
     
     print(f"The time elapsed in the non-recursive algorithm is {dp_time:.6f} seconds.")
     print(f"There are a total of {total_ways_dp} ways.")
     for i, way in enumerate(paths, 1):
+        print(f"Way {i}: {way}")
+    #------------------------------------------------------
+    start_time_rc = time.time()
+    total_ways_rc = count_ways_rc(n, tuple(allowed_steps))
+    rc_time = time.time() - start_time_rc
+    paths_rc = generate_paths(n, allowed_steps, path=[], paths=[])
+    
+    print(f"The time elapsed in the recursive algorithm is {rc_time:.6f} seconds.")
+    print(f"There are a total of {total_ways_rc} ways.")
+    for i, way in enumerate(paths_rc, 1):
         print(f"Way {i}: {way}")
 
 if __name__ == "__main__":
