@@ -1,0 +1,7 @@
+How to run the program?
+Unzip the zip file. Click on the PA-4-Executable.exe in the folder. In the webpage that opens, fork the Replit. Edit the fork, go into the main.py file, and press "run." 
+
+Group member contribution
+Liem Chau: 100% (Liem Chau)
+Steve Nguyen 100% (Steve Nguyen)
+Cody Shamback: 100% (Cody Shamback)

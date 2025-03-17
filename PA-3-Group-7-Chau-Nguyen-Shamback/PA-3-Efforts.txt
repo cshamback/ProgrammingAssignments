@@ -1,0 +1,7 @@
+# How to run the program?
+Extract the contents of the PA-3-Group-7-Chau-Nguyen-Shamback.zip folder. Click the "PA-3-Executable.exe" link, which will take you to its Replit page. Fork the project and click the green "run" button at the top center of the page. You'll get a console UI that will let you choose specific numbers and dynamic vs. recursive algorithms. In the file explorer on the left, there is a file called Fibonacci_Time.csv, which populates with data every time you run the program.  
+
+# Group member contribution
+Liem Chau: 100% (Liem Chau)
+Cody Shamback: 100% (Cody Shamback)
+Steve Nguyen : 100% (Steve Nguyen)
