@@ -1,4 +1,5 @@
 import random
+from task import *
 # merges 2 subarrays, arr1 and arr2 (used in mergeSort() below)
 
 # l and r are the beginning and ending indices of the merge region
@@ -32,7 +33,7 @@ def merge(arr1, arr2):
         
         # if there are still elements in both arr1 and arr2, 
         # decide which one is smaller and append it 
-        if(arr1[i] < arr2[k]): 
+        if(arr1[i].end < arr2[k].end): 
             result.append(arr1[i])
             i = i + 1
         else:
@@ -64,7 +65,3 @@ def mergeSort(l, r, data):
         return merge(left, right) # merge left and right subarrays 
     else:
         return []
-
-def randomNumberFill(least, greatest):
-    submit = random.randint(least,greatest)
-    return submit
