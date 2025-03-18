@@ -13,14 +13,17 @@ tasks = []
 
 # get all tasks
 while(i < numTasks):
+    print()
     currEarning = int(input("Enter the amount earned by task " + str(i + 1) + ": "))
     currStart = int(input("Enter the start time of the task: "))
     currEnd = int(input("Enter the end time of the task: "))
 
-    currTask = Task(currEarning, currStart, currEnd)
+    currTask = Task(currEarning, currStart, currEnd, "Task " + str(i + 1))
     tasks.append(currTask)
 
     i = i + 1
+
+print()
 
 # sort tasks by end time in asc. order (starting from 0)
 sortedTasks = mergeSort(0, len(tasks), tasks)
@@ -31,11 +34,11 @@ print("| Task Number | Start Times | End Times | Earnings |")
 print("+--------------------------------------------------+") 
 
 for i in range(numTasks):
-    numSpaces1 = len("| Task Number ") - len(str(i + 1))
+    numSpaces1 = len("| Task Number ") - len(str(tasks[i].name))
     numSpaces2 = len("| Start Times ") - len(str(tasks[i].start))
     numSpaces3 = len("| End Times ") - len(str(tasks[i].end))
     numSpaces4 = len("| Earnings ") - len(str(tasks[i].pay)) - 2
 
-    print("| " + str(i + 1) + (" " * numSpaces1) + str(tasks[i].start) + (" " * numSpaces2) + str(tasks[i].end) + (" " * numSpaces3) + str(tasks[i].pay) + (" " * numSpaces4) + "|")
+    print("| " + str(tasks[i].name) + (" " * numSpaces1) + str(tasks[i].start) + (" " * numSpaces2) + str(tasks[i].end) + (" " * numSpaces3) + str(tasks[i].pay) + (" " * numSpaces4) + "|")
 
 print("+--------------------------------------------------+") 
