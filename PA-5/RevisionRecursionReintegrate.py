@@ -2,28 +2,24 @@ from task import *
 from merge import *
 
 # RECREATION OF EVERYTHING FOR TESTING STUFF
-numTasks = int(input("Enter the number of all paid tasks: "))
-
-tasks = []
-for i in range(numTasks):
-    print()
-    currEarning = int(input(f"Enter the amount earned by task {i + 1}: "))
-    currStart = int(input("Enter the start time of the task: "))
-    currEnd = int(input("Enter the end time of the task: "))
-
-    tasks.append(Task(currEarning, currStart, currEnd, f"Task {i + 1}"))
-
-
+tasks = [Task(30, 0, 3, "Task 1"), Task(30, -1, 4, "Task 2"), Task(10, 1, 2, "Task 3"), Task(1, 4, 6, "Task 4"), Task(5, 7, 10, "Task 5"), Task(6, 9, 11, "Task 6")]
 def RecursiveDP(taskQueue):
     memo = {}  # Initialize a fresh dictionary
+    def confidenceChecks(listIndex):
+        if listIndex >= len(taskQueue):
+            return 0
+    
+        # Check if already calculated this index
+        if listIndex in memo:
+            return memo[listIndex]
+        
+        keptProfit = taskQueue[listIndex].pay + confidenceChecks(listIndex + 1)
+        memo[listIndex] = keptProfit
+        print(memo)
+        return keptProfit
+    
+    return confidenceChecks(0)
+    
 
-    for i, task in enumerate(taskQueue):  # Ensure we iterate properly
-        memo[i] = task
-
-    return memo
-
-formatted_memo = RecursiveDP(tasks)
-for key, value in formatted_memo.items():
-    print(f"{{{key}: {value}}}")
-
+print(f"Total profit: {RecursiveDP(tasks)}")
     

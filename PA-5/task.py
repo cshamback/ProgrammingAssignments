@@ -6,5 +6,5 @@ class Task:
         self.end = e
         self.name = n
 
-    def __str__(self):
+    def __repr__(self):
         return f"Name: {self.name} Start time: {self.start} End time: {self.end} Pay: {self.pay}"
