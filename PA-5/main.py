@@ -27,7 +27,7 @@ print()
 
 # sort tasks by end time in asc. order (starting from 0)
 sortedTasks = mergeSort(0, len(tasks), tasks)
-tasks = sortedTasks;
+tasks = sortedTasks
 
 print("+--------------------------------------------------+")
 print("| Task Number | Start Times | End Times | Earnings |")
