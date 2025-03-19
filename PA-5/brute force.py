@@ -51,7 +51,7 @@ def main():
     elapsed_time = time.time() - start_time
     
     # Display results
-    print("\nThe time elapsed in the brute-force algorithm is {:.6f} seconds.".format(elapsed_time))
+    print("\nThe time elapsed in the brute-force algorithm is {:.6f} ms.".format(elapsed_time * 1000))
     print("Maximum Earning: {}\n".format(max_earning))
     
     print("There are {} options to select different sets of tasks.".format(len(best_schedules)))
