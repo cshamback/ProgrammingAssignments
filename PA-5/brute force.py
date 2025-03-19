@@ -39,7 +39,8 @@ def main():
         currEarning = int(input("Enter the amount earned by task " + str(i + 1) + ": "))
         currStart = int(input("Enter the start time of the task: "))
         currEnd = int(input("Enter the end time of the task: "))
-        tasks.append(Task(currEarning, currStart, currEnd))
+        tasks.append(Task(currEarning, currStart, currEnd, "Task " + str(i + 1)))
+
     
     # Sort tasks by end time
     tasks = mergeSort(0, len(tasks) - 1, tasks)
@@ -53,9 +54,10 @@ def main():
     print("\nThe time elapsed in the brute-force algorithm is {:.6f} seconds.".format(elapsed_time))
     print("Maximum Earning: {}\n".format(max_earning))
     
+    print("There are {} options to select different sets of tasks.".format(len(best_schedules)))
     for idx, schedule in enumerate(best_schedules, 1):
-        task_order = " -> ".join("Task_{}".format(tasks.index(task) + 1) for task in schedule)
-        print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))
+        task_order = " -> ".join(task.name for task in schedule)
+        print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))   
 
 if __name__ == "__main__":
     main()
