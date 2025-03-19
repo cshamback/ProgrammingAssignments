@@ -10,7 +10,12 @@ def printTasks(memo):
             print(" with a total earning of " + str(key) + ".")
             print()
 
-    print()
+def countTaskLists(memo):
+    count = 0
+    for key in memo: 
+        for taskList in memo[key]:
+            count += 1
+    return count 
 
 # checks if the start or end times overlap, returns bool
 def overlaps(t1, t2): 
@@ -35,13 +40,13 @@ def dp(tasks):# tasks is an array of Task objects
         while(j < i):
             # if the two tasks do NOT overlap, we can put them together. 
             if(overlaps(tasks[i], tasks[j]) == False):
-                
+
                 # we found a new profit, so it needs a new entry in memo. 
                 newKey = tasks[j].pay + tasks[i].pay
 
                 # copy existing sequences at previous pay into a new array
                 # seq = iterate thru all lists associated with key, append to taskLists one at a time
-                taskLists = [seq + [tasks[j].name] for seq in memo.get(tasks[i].pay, [])]
+                taskLists = [[tasks[j].name] + seq for seq in memo.get(tasks[i].pay, [])]
 
                 # append old task list back to memo[newKey]
                 if newKey not in memo:
@@ -52,11 +57,14 @@ def dp(tasks):# tasks is an array of Task objects
                 # if the pair of tasks does not result in higher profit, ignore 
             j = j + 1
 
+    # remove subsets from array
+    
+
     # return value of max key in memo
     maxPay = max(memo)
 
     # print all task lists that fit this profit
-    print("All possible sets of tasks are: ")
+    print("There are " + str(countTaskLists(memo)) + " options to select different sets of tasks.")
     printTasks(memo)     
     print()       
 
