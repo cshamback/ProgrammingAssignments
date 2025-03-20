@@ -47,14 +47,23 @@ while True:
 
     print("+--------------------------------------------------+") 
 
-# Measures Execution Time and Run Algorithms
+# Measures Execution Time and Run Algorithms for brute force
     start_time = time.time()
     best_schedules, max_earning = brute_force_maximize_earnings(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
-# Print Results of Time and Earnings
+# Print Results of Time and Earnings for Brute Force Algorithm
     print() #spacing
     print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
+
+# Measures Execution time for  for Dynamic Programming Algorithm
+    start_time = time.time()
+    dp_max_profit = dp(tasks)
+    elapsed_time = (time.time() - start_time) * 1000 #converts to ms
+
+# Print Results of Time and Earnings for Dynamic Programming Algorithm
+    print(f"The time elapsed in the dynamic programming algorithm is {elapsed_time:.6f} ms and value is {dp_max_profit}")
+
 
 # Print Best Schedule for Each Approach
     print("Best schedule for each algorithm: ")
