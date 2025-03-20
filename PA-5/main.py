@@ -26,9 +26,8 @@ while True:
         currTask = Task(currEarning, currStart, currEnd, "Task " + str(i + 1))
         tasks.append(currTask)
 
-    i = i + 1
-
-    print()
+        i = i + 1
+        print()
 
 # sort tasks by end time in asc. order (starting from 0)
     sortedTasks = mergeSort(0, len(tasks), tasks)
