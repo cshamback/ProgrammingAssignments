@@ -1,6 +1,8 @@
 from task import *
 from merge import *
 
+from collections import defaultdict
+
 # prints dictionary of tasks as lists separated by arrows
 def printTasks(memo):
     for key in memo: 
@@ -23,29 +25,44 @@ def overlaps(t1, t2):
     return (t1.start == t2.start) or (t1.start > t2.start and t1.start < t2.end) or (t1.end > t2.start and t1.end < t2.end)
 
 # given a 2d array and a list, remove all subsets of the list from the 2d array
-def removeSubsets(memo, newArr):
-    newSet = set(newArr)
+def removeSubsets(memo):
+    # convert each value (2d array) to a list of frozen sets
+    # frozen sets are sets that cannot be modified
+    memoSets = {key: [frozenset(sublist) for sublist in value] for key, value in memo.items()}
 
-    for key in list(memo.keys()):
-        # set memo[key] to only contain sequences that are not subsets of a given set
-        memo[key] = [seq for seq in memo[key] if not set(seq).issubset(newSet)]
+    # separates task lists from their 2d array
+    # unique tasks are used as keys; keys are used as values so there can be multiple keys 
+    setDict = defaultdict(set)
+    for key, sets in memoSets.items():
+        for s in sets:
+            setDict[s].add(key)
+    
+    # remove subsets
+    uniqueSets = list(setDict.keys()) # one large list containing every task list represented as a frozenset
+                                      # ie.[frozenset({"Task 1"}), frozenset({"Task 2"})...]
+    toRemove = set() # can't delete while iterating through array, so store values to be deleted for later
 
-        # if there are no more values associated with the key, delete it 
-        if memo[key] == None:
-            del memo[key]
+    for i, s1 in enumerate(uniqueSets):
+        for j, s2 in enumerate(uniqueSets):
 
-# iterate through every arr in existing arrs and determine if new arr is a subset of any of them 
-def isSubset(newArr, existingArrs):
-    newSet = set(newArr)
+            # in python, the "<" operator between two sets (such as s1 < s2)
+            # checks if s1 is a proper subset of s2 (s1 contains all elements in s2, and s2 contains at least 1 extra element)
+            if i != j and s1 < s2:
+                toRemove.add(s1)
 
-    for arr in existingArrs: 
-        if(newSet.issubset(set(arr))):
-            print("Found subset. " + str(arr) + " is a subset of " + str(newSet))
-            return True
-        else: 
-            print(str(arr) + " is not a subset of " + str(newSet))
-        
-    return False 
+    # remove toRemove items from memo
+    cleanMemo = {}
+
+    # iterate through all of setDict
+    for key, sets in setDict.items(): # key = unique set, value = that set's profit
+        memoKey = sets.pop()
+        if(key not in toRemove):
+            if(memoKey not in cleanMemo):
+                cleanMemo[memoKey] = []
+
+            cleanMemo[memoKey].append(key)
+
+    return cleanMemo
 
 def dp(tasks):# tasks is an array of Task objects
     memo = {} # key = profit, value = list of tasks leading to profit 
@@ -72,7 +89,8 @@ def dp(tasks):# tasks is an array of Task objects
                 # list of all new sequences created by adding tasks[j] to all sequences in memo.get(key)
                 taskList = []
                 for seq in memo.get(tasks[i].pay, []):
-                    if [tasks[j].name] not in seq:
+                    # make sure we're not adding duplicates to taskList
+                    if [tasks[j].name] not in seq and [tasks[j].name] + seq not in seq:
                         taskList.append([tasks[j].name] + seq)
 
                 if(newKey not in memo):
@@ -89,11 +107,11 @@ def dp(tasks):# tasks is an array of Task objects
     # we want to iterate thru the keys in descending order. 
     # most likely, the highest profits will have the most tasks associated with them. 
     # this means more subsets will be elimated and we'll search less of the dict 
-    
+
     keys = list(memo.keys())
     keys.sort()
     keys.reverse()
-    print(keys)
+    memo = removeSubsets(memo)
 
     # return value of max key in memo
     maxPay = max(memo)
