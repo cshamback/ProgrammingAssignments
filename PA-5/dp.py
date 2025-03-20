@@ -10,7 +10,6 @@ def printTasks(memo):
         for taskList in memo[key]:
             print(" " + " -> ".join(taskList), end="")
             print(" with a total earning of " + str(key) + ".")
-            print()
 
 def countTaskLists(memo):
     count = 0
@@ -21,8 +20,8 @@ def countTaskLists(memo):
 
 # checks if the start or end times overlap, returns bool
 def overlaps(t1, t2): 
-    # 3 cases for overlap: they start at the same time, t1 starts in the middle of t2, t1 ends in the middle of t2
-    return (t1.start == t2.start) or (t1.start > t2.start and t1.start < t2.end) or (t1.end > t2.start and t1.end < t2.end)
+    # overlap if t1 starts in the middle of t2, or t1 ends in the middle of t2
+    return (t1.start < t2.start and t2.start < t1.end) or (t1.start < t2.end and t2.end < t1.end)
 
 # given a 2d array and a list, remove all subsets of the list from the 2d array
 def removeSubsets(memo):
@@ -64,65 +63,54 @@ def removeSubsets(memo):
 
     return cleanMemo
 
-def dp(tasks):# tasks is an array of Task objects
-    memo = {} # key = profit, value = list of tasks leading to profit 
+def dp(tasks): # tasks is an array of Task objects
 
-    # store list of tasks in memo where key = profit and value = [[task]]
-    # each of these is a starting point for a list of tasks, and multiple lists for a single profit is possible
-    # we will later get rid of lists that are subsets of other lists 
-    for task in tasks:
-        if task.pay not in memo: 
-            memo[task.pay] = []
-        memo[task.pay].append([task.name])
+    # memo stores all schedules and their profits
+    # key = profit, value = 2d array of all schedules with that profit 
+    memo = {}
+    
+    T = [None] * len(tasks)
+    T[0] = tasks[0].pay
+
+    # initialize memo: we CAN do all tasks independently 
+    for task in tasks: 
+        memo[task.pay] = [[task.name]]
+    
+    # examine every task - already in order by end time 
+    for i in range(1, len(tasks)): #  iterates thru all keys. can get values associated using memo[key]
+        
+        # add profit of i by itself to array of profits
+        T[i] = max(tasks[i].pay, T[i - 1])
+        
+        # examine every task that ends before task i in reverse order (closest to i first)
+        j = i - 1
+        while(j >= 0):
+
+            # only care about adding new tasks that don't overlap with task i 
+            if(tasks[j].end <= tasks[i].start):
+                T[i] = max(T[i], tasks[i].pay + T[j])
+
+                # add tasks[j] to memo to beginning of every entry that starts with tasks[i]
+                # make each of these a new entry in memo, keep the old ones 
+                # we will remove subsets later
+                toAdd = {} # stores new key/value pairs to be added after iteration is done (not allowed to change size of dict during iteration)
+                for key in memo: 
+                    for taskList in memo[key]:
+                        if taskList[0] == tasks[i].name:
+
+                            newList = [tasks[j].name] + taskList
+                            newKey = key + tasks[j].pay
+                            toAdd[newKey] = [newList]
+
+                memo.update(toAdd) # puts toAdd's data in memo 
+
+            j -= 1
+
+    maxProfit = -1
+    for val in T:
+        if(maxProfit < val):
+            maxProfit = val
 
     # printTasks(memo)
-    
-    for i in range(1, len(tasks)): #  iterates thru all keys. can get values associated using memo[key]
-        j = 0
-        while(j < i):
-            # if the two tasks do NOT overlap, we can put them together. 
-            if(overlaps(tasks[i], tasks[j]) == False):
 
-                # we found a new profit, so it needs a new entry in memo. 
-                newKey = tasks[j].pay + tasks[i].pay
-
-                # list of all new sequences created by adding tasks[j] to all sequences in memo.get(key)
-                taskList = []
-                for seq in memo.get(tasks[i].pay, []):
-                    # make sure we're not adding duplicates to taskList
-                    if [tasks[j].name] not in seq and [tasks[j].name] + seq not in seq:
-                        taskList.append([tasks[j].name] + seq)
-
-                if(newKey not in memo):
-                    memo[newKey] = []
-
-                memo[newKey].extend(taskList)
-
-                # if the pair of tasks does not result in higher profit, ignore 
-            j = j + 1
-
-    # remove subsets
-    # if a task has a subset anywhere in memo, delete that subset. 
-
-    # we want to iterate thru the keys in descending order. 
-    # most likely, the highest profits will have the most tasks associated with them. 
-    # this means more subsets will be elimated and we'll search less of the dict 
-
-    keys = list(memo.keys())
-    keys.sort()
-    keys.reverse()
-    memo = removeSubsets(memo)
-
-    # return value of max key in memo
-    maxPay = max(memo)
-
-    # print all task lists that fit this profit
-    print("There are " + str(countTaskLists(memo)) + " options to select different sets of tasks.")
-    printTasks(memo)     
-    print()       
-
-    # return 2d array of task lists that have max profit
-    return memo[maxPay]
-
-tasks = [Task(30, 0, 3, "Task 1"), Task(30, 0, 4, "Task 2"), Task(10, 1, 2, "Task 3"), Task(1, 4, 6, "Task 4"), Task(5, 7, 10, "Task 5"), Task(6, 9, 11, "Task 6")]
-dp(tasks)
+    return maxProfit

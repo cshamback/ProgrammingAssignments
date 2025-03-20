@@ -4,8 +4,10 @@ from merge import *
 import time
 from bf import brute_force_maximize_earnings
 from custom_algorithm import find_max_sets 
+from dp import *
 
-numTasks = int(input("Enter the number of all paid tasks: "))
+# numTasks = int(input("Enter the number of all paid tasks: "))
+numTasks = 4
 i = 0
 
 # task objects are defined in task.py
@@ -15,6 +17,7 @@ i = 0
 tasks = []
 
 # get all tasks
+"""
 while(i < numTasks):
     print()
     currEarning = int(input("Enter the amount earned by task " + str(i + 1) + ": "))
@@ -25,6 +28,8 @@ while(i < numTasks):
     tasks.append(currTask)
 
     i = i + 1
+"""
+tasks = [Task(10, 0, 1, "Task 1"), Task(11, 1, 2, "Task 2"), Task(9, 5, 6, "Task 3"), Task(14, 5, 9, "Task 4")]
 
 print()
 
@@ -51,9 +56,14 @@ start_time = time.time()
 best_schedules, max_earning = brute_force_maximize_earnings(tasks)
 elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
+start_time = time.time()
+dp(tasks)
+elapsed_time_DP = (time.time() - start_time) * 1000 #converts to ms
+
 # Print Results of Time and Earnings
 print() #spacing
 print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
+print(f"The time elapsed in the non-recursive DP algorithm is {elapsed_time_DP:.6f} ms and value is {max_earning}")
 
 # Print Best Schedule for Each Approach
 print("Best schedule for each algorithm: ")
