@@ -1,6 +1,8 @@
 # UI/MAIN 
 from task import *
 from merge import *
+import time
+from bf import brute_force_maximize_earnings
 
 numTasks = int(input("Enter the number of all paid tasks: "))
 i = 0
@@ -42,3 +44,29 @@ for i in range(numTasks):
     print("| " + str(tasks[i].name) + (" " * numSpaces1) + str(tasks[i].start) + (" " * numSpaces2) + str(tasks[i].end) + (" " * numSpaces3) + str(tasks[i].pay) + (" " * numSpaces4) + "|")
 
 print("+--------------------------------------------------+") 
+
+# Measures Execution Time and Run Algorithms
+start_time = time.time()
+best_schedules, max_earning = brute_force_maximize_earnings(tasks)
+elapsed_time = (time.time() - start_time) * 1000 #converts to ms
+
+# Print Results of Time and Earnings
+print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
+
+# Print Best Schedule for Each Approach
+print("Best schedule for brute force method: ")
+for idx, schedule in enumerate(best_schedules, 1):
+    task_order = " -> ".join(task.name for task in schedule)
+    print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))
+
+# Continuation Prompt
+while True:
+    cont = input("Would you like to continue? (y/n): ").strip().lower()
+    if cont == "y":
+        break
+    elif cont == "n":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid input. Please enter 'y' or 'n'.")
+        continue
