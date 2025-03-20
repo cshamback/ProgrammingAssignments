@@ -52,13 +52,14 @@ best_schedules, max_earning = brute_force_maximize_earnings(tasks)
 elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
 # Print Results of Time and Earnings
+print() #spacing
 print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
 
 # Print Best Schedule for Each Approach
-print("Best schedule for brute force method: ")
+print("Best schedule for each algorithm: ")
 for idx, schedule in enumerate(best_schedules, 1):
     task_order = " -> ".join(task.name for task in schedule)
-    print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))
+    print("{}, with a total earning of {}".format(task_order, max_earning))
 
 # Calls find max sets function from custom_algorithm.py
 start_time = time.time()
