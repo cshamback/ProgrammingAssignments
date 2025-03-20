@@ -1,6 +1,9 @@
 # UI/MAIN 
 from task import *
 from merge import *
+import time
+from bf import brute_force_maximize_earnings
+from custom_algorithm import find_max_sets 
 
 numTasks = int(input("Enter the number of all paid tasks: "))
 i = 0
@@ -42,3 +45,41 @@ for i in range(numTasks):
     print("| " + str(tasks[i].name) + (" " * numSpaces1) + str(tasks[i].start) + (" " * numSpaces2) + str(tasks[i].end) + (" " * numSpaces3) + str(tasks[i].pay) + (" " * numSpaces4) + "|")
 
 print("+--------------------------------------------------+") 
+
+# Measures Execution Time and Run Algorithms
+start_time = time.time()
+best_schedules, max_earning = brute_force_maximize_earnings(tasks)
+elapsed_time = (time.time() - start_time) * 1000 #converts to ms
+
+# Print Results of Time and Earnings
+print() #spacing
+print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
+
+# Print Best Schedule for Each Approach
+print("Best schedule for each algorithm: ")
+for idx, schedule in enumerate(best_schedules, 1):
+    task_order = " -> ".join(task.name for task in schedule)
+    print("{}, with a total earning of {}".format(task_order, max_earning))
+
+# Calls find max sets function from custom_algorithm.py
+start_time = time.time()
+find_max_sets = find_max_sets(tasks)
+
+# Print Results of Custom Algorithm
+print(f"\nThere are {len(find_max_sets)} options to select different sets of tasks.")
+for idx, schedule in enumerate(find_max_sets, 1):
+    task_order = " -> ".join(task.name for task in schedule)
+    total_earning = sum(task.pay for task in schedule) 
+    print(f"Option {idx}: {task_order}, with a total earning of {total_earning}".format(idx, task_order, total_earning))
+
+# Continuation Prompt
+while True:
+    cont = input("Would you like to continue? (y/n): ").strip().lower()
+    if cont == "y":
+        break
+    elif cont == "n":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid input. Please enter 'y' or 'n'.")
+        continue
