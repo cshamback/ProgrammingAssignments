@@ -3,6 +3,7 @@ from task import *
 from merge import *
 import time
 from bf import brute_force_maximize_earnings
+from custom_algorithm import find_max_sets 
 
 numTasks = int(input("Enter the number of all paid tasks: "))
 i = 0
@@ -58,6 +59,17 @@ print("Best schedule for brute force method: ")
 for idx, schedule in enumerate(best_schedules, 1):
     task_order = " -> ".join(task.name for task in schedule)
     print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))
+
+# Calls find max sets function from custom_algorithm.py
+start_time = time.time()
+find_max_sets = find_max_sets(tasks)
+
+# Print Results of Custom Algorithm
+print(f"\nThere are {len(find_max_sets)} options to select different sets of tasks.")
+for idx, schedule in enumerate(find_max_sets, 1):
+    task_order = " -> ".join(task.name for task in schedule)
+    total_earning = sum(task.pay for task in schedule) 
+    print(f"Option {idx}: {task_order}, with a total earning of {total_earning}".format(idx, task_order, total_earning))
 
 # Continuation Prompt
 while True:
