@@ -59,7 +59,7 @@ while True:
 
 # Measures Execution time for Recursive Dynamic Programming Algorithm
     start_time = time.time()
-    rdp_max_profit = dp(tasks)
+    rdp_max_profit = RecursiveDP(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
 # Print Results of Time and Earnings for Recursive Dynamic Programming Algorithm
