@@ -90,8 +90,3 @@ def dp(tasks): # tasks is an array of Task objects
             maxProfit = val
 
     return maxProfit
-
-temp = [Task(10, 0, 3, "Task 1"), Task(11, 1, 3, "Task 2"), Task(12, 4, 5, "Task 3"), Task(13, 6, 7, "Task 4")]
-mergeSort(0, len(temp), temp)
-
-print(dp(temp))

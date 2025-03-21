@@ -5,6 +5,7 @@ import time
 from bf import brute_force_maximize_earnings
 from custom_algorithm import find_max_sets 
 from dp import *
+from RevisionRecursionReintegrate import *
 
 while True:
     numTasks = int(input("Enter the number of all paid tasks: "))
@@ -56,20 +57,21 @@ while True:
     print() #spacing
     print(f"The time elapsed in the brute-force algorithm is {elapsed_time:.6f} ms and value is {max_earning}")
 
-# Measures Execution time for  for Dynamic Programming Algorithm
+# Measures Execution time for Recursive Dynamic Programming Algorithm
+    start_time = time.time()
+    rdp_max_profit = dp(tasks)
+    elapsed_time = (time.time() - start_time) * 1000 #converts to ms
+
+# Print Results of Time and Earnings for Recursive Dynamic Programming Algorithm
+    print(f"The time elapsed in the recursive dynamic programming algorithm is {elapsed_time:.6f} ms and value is {rdp_max_profit}")
+
+# Measures Execution time for Dynamic Programming Algorithm
     start_time = time.time()
     dp_max_profit = dp(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
 # Print Results of Time and Earnings for Dynamic Programming Algorithm
-    print(f"The time elapsed in the dynamic programming algorithm is {elapsed_time:.6f} ms and value is {dp_max_profit}")
-
-
-# Print Best Schedule for Each Approach
-    print("Best schedule for each algorithm: ")
-    for idx, schedule in enumerate(best_schedules, 1):
-        task_order = " -> ".join(task.name for task in schedule)
-        print("{}, with a total earning of {}".format(task_order, max_earning))
+    print(f"The time elapsed in the non-recursive dynamic programming algorithm is {elapsed_time:.6f} ms and value is {dp_max_profit}")
 
 # Calls find max sets function from custom_algorithm.py
     start_time = time.time()
