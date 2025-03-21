@@ -33,7 +33,8 @@ def merge(arr1, arr2):
         
         # if there are still elements in both arr1 and arr2, 
         # decide which one is smaller and append it 
-        if(arr1[i].end < arr2[k].end): 
+        # makes sure to sort by end time but use start time as a tiebreaker
+        if(arr1[i].end < arr2[k].end or (arr1[i].end == arr2[k].end and arr1[i].start < arr2[k].start)): 
             result.append(arr1[i])
             i = i + 1
         else:
