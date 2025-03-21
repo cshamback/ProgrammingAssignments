@@ -59,7 +59,7 @@ while True:
 
 # Measures Execution time for Recursive Dynamic Programming Algorithm
     start_time = time.time()
-    rdp_max_profit = RecursiveDP(tasks)
+    maxprofit, rdp_max_profit = RecursiveDP(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
 # Print Results of Time and Earnings for Recursive Dynamic Programming Algorithm
@@ -67,11 +67,11 @@ while True:
 
 # Measures Execution time for Dynamic Programming Algorithm
     start_time = time.time()
-    dp_max_profit = dp(tasks)
+    maxProfit = dp(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
 # Print Results of Time and Earnings for Dynamic Programming Algorithm
-    print(f"The time elapsed in the non-recursive dynamic programming algorithm is {elapsed_time:.6f} ms and value is {dp_max_profit}")
+    print(f"The time elapsed in the non-recursive dynamic programming algorithm is {elapsed_time:.6f} ms and value is {maxProfit}")
 
 # Calls find max sets function from custom_algorithm.py
     start_time = time.time()
@@ -85,16 +85,16 @@ while True:
         print(f"Option {idx}: {task_order}, with a total earning of {total_earning}")
 
 # Continuation Prompt
-    while True:
-        cont = input("\nWould you like to continue and enter new tasks? (y/n): \n").strip().lower()
+        while True:
+            cont = input("\nWould you like to continue and enter new tasks? (y/n): \n").strip().lower()
     
-        if cont == "y":
-            print("\nRestarting the program...\n")
-            break  # breaks out inner loop and restarts main loop
+            if cont == "y":
+                print("\nRestarting the program...\n")
+                break  # breaks out inner loop and restarts main loop
 
-        elif cont == "n":
-            print("\nGoodbye!\n")
-            exit() #exits the program entirely
+            elif cont == "n":
+                print("\nGoodbye!\n")
+                exit() #exits the program entirely
 
-        else:
-            print("Invalid input. Please enter 'y' or 'n'.")
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
