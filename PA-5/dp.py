@@ -28,6 +28,7 @@ def removeSubsets(memo):
     # convert each value (2d array) to a list of frozen sets
     # frozen sets are sets that cannot be modified
     memoSets = {key: [frozenset(sublist) for sublist in value] for key, value in memo.items()}
+    print(memoSets)
 
     # separates task lists from their 2d array
     # unique tasks are used as keys; keys are used as values so there can be multiple keys 
@@ -64,17 +65,9 @@ def removeSubsets(memo):
     return cleanMemo
 
 def dp(tasks): # tasks is an array of Task objects
-
-    # memo stores all schedules and their profits
-    # key = profit, value = 2d array of all schedules with that profit 
-    memo = {}
     
     T = [None] * len(tasks)
     T[0] = tasks[0].pay
-
-    # initialize memo: we CAN do all tasks independently 
-    for task in tasks: 
-        memo[task.pay] = [[task.name]]
     
     # examine every task - already in order by end time 
     for i in range(1, len(tasks)): #  iterates thru all keys. can get values associated using memo[key]
@@ -85,24 +78,9 @@ def dp(tasks): # tasks is an array of Task objects
         # examine every task that ends before task i in reverse order (closest to i first)
         j = i - 1
         while(j >= 0):
-
             # only care about adding new tasks that don't overlap with task i 
             if(tasks[j].end <= tasks[i].start):
                 T[i] = max(T[i], tasks[i].pay + T[j])
-
-                # add tasks[j] to memo to beginning of every entry that starts with tasks[i]
-                # make each of these a new entry in memo, keep the old ones 
-                # we will remove subsets later
-                toAdd = {} # stores new key/value pairs to be added after iteration is done (not allowed to change size of dict during iteration)
-                for key in memo: 
-                    for taskList in memo[key]:
-                        if taskList[0] == tasks[i].name:
-
-                            newList = [tasks[j].name] + taskList
-                            newKey = key + tasks[j].pay
-                            toAdd[newKey] = [newList]
-
-                memo.update(toAdd) # puts toAdd's data in memo 
 
             j -= 1
 
@@ -111,6 +89,9 @@ def dp(tasks): # tasks is an array of Task objects
         if(maxProfit < val):
             maxProfit = val
 
-    # printTasks(memo)
-
     return maxProfit
+
+temp = [Task(10, 0, 3, "Task 1"), Task(11, 1, 3, "Task 2"), Task(12, 4, 5, "Task 3"), Task(13, 6, 7, "Task 4")]
+mergeSort(0, len(temp), temp)
+
+print(dp(temp))

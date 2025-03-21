@@ -8,3 +8,5 @@ class Task:
 
     def __repr__(self):
         return f"Name: {self.name} Start time: {self.start} End time: {self.end} Pay: {self.pay}"
+    def __eq__(self,other):
+        return self.name == other
