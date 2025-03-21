@@ -29,35 +29,3 @@ def brute_force_maximize_earnings(tasks):
                     best_schedules.append(subset)
     
     return best_schedules, max_earning
-
-def main():
-    # Get user input
-    numTasks = int(input("Enter the number of all paid tasks: "))
-    tasks = []
-    
-    for i in range(numTasks):
-        currEarning = int(input("Enter the amount earned by task " + str(i + 1) + ": "))
-        currStart = int(input("Enter the start time of the task: "))
-        currEnd = int(input("Enter the end time of the task: "))
-        tasks.append(Task(currEarning, currStart, currEnd, "Task " + str(i + 1)))
-
-    
-    # Sort tasks by end time
-    tasks = mergeSort(0, len(tasks) - 1, tasks)
-    
-    # Measure brute-force execution time
-    start_time = time.time()
-    best_schedules, max_earning = brute_force_maximize_earnings(tasks)
-    elapsed_time = time.time() - start_time
-    
-    # Display results
-    print("\nThe time elapsed in the brute-force algorithm is {:.6f} ms.".format(elapsed_time * 1000))
-    print("Maximum Earning: {}\n".format(max_earning))
-    
-    print("There are {} options to select different sets of tasks.".format(len(best_schedules)))
-    for idx, schedule in enumerate(best_schedules, 1):
-        task_order = " -> ".join(task.name for task in schedule)
-        print("Option {}: {}, with a total earning of {}".format(idx, task_order, max_earning))   
-
-if __name__ == "__main__":
-    main()
