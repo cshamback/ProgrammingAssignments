@@ -28,19 +28,19 @@ def RecursiveDP(taskQueue):
         
         # Define the current task's pay and move on
         takeProfit = currentTask.pay
-        nextCompatibleTask = listIndex + 1
+        nextTask = listIndex + 1
         
         # Looking ahead for other tasks 
-        while nextCompatibleTask < len(taskQueue) and taskQueue[nextCompatibleTask].start < currentTask.end:
-            nextCompatibleTask += 1
+        while nextTask < len(taskQueue) and taskQueue[nextTask].start < currentTask.end:
+            nextTask += 1
         
         # Add profit of the next task to the original
-        takeProfit += computeProfit(nextCompatibleTask)[0]
+        takeProfit += computeProfit(nextTask)[0]
         
         # Determine which option is better
         if takeProfit > skipProfit:
             bestProfit = takeProfit
-            bestPath = [currentTask] + computeProfit(nextCompatibleTask)[1]  # Include current task in path
+            bestPath = [currentTask] + computeProfit(nextTask)[1]  # Include current task in path
         else:
             bestProfit = skipProfit
             bestPath = skipPath
