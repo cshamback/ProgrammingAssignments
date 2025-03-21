@@ -2,64 +2,67 @@ from task import *
 from merge import *
 from bf import *
 
+# RECREATION OF EVERYTHING FOR TESTING STUFF
+tasks = [Task(3000, 0, 3, "Task 1"), Task(30, -1, 4, "Task 2"), Task(10, 1, 2, "Task 3"), Task(1, 4, 6, "Task 4"), Task(5, 7, 10, "Task 5"), Task(6, 9, 11, "Task 6")]
+
 def RecursiveDP(taskQueue):
-    memo = {}  # Store max profits at each index
-    memoPath = {}  # Store the best paths for each index
-    allPaths = []  # Store all possible valid paths
+    memo = {}  # Initialize a dictionary for profits
+    memoPath = {}  # Initialize a dictionary for paths
+    allPaths = []  # Stores all possible paths with their earnings
+    
 
-    def computeProfit(listIndex, selectedTasks=[]):  # Pass selectedTasks to track conflicts
-        if listIndex >= len(taskQueue):  # Base case: end of the list
-            return 0, []
-
-        if listIndex in memo:  # Use memoization if result is already computed
-            return memo[listIndex], memoPath[listIndex]
+    # Computes the best path to get the highest profits
+    def computeProfit(listIndex):
+        # checks the indices themselves for a set length compared to the queue
+        if listIndex >= len(taskQueue):
+            return 0, []  
         
-        currentTask = taskQueue[listIndex]
-
-        # Option 1: Skip the current task
-        skipProfit, skipPath = computeProfit(listIndex + 1, selectedTasks)
-
-        # Option 2: Take the current task (if no conflicts)
+        # Check if already calculated this index, otherwise make it the current task
+        if listIndex in memo:
+            return memo[listIndex], memoPath[listIndex]
+        else:
+            currentTask = taskQueue[listIndex]
+    
+        # Tell it to move on, it's had enough
+        skipProfit, skipPath = computeProfit(listIndex + 1)
+        
+        # Define the current task's pay and move on
         takeProfit = currentTask.pay
         nextCompatibleTask = listIndex + 1
-
-        # Find the next **truly non-overlapping** task
+        
+        # Looking ahead for other tasks 
         while nextCompatibleTask < len(taskQueue) and taskQueue[nextCompatibleTask].start < currentTask.end:
             nextCompatibleTask += 1
-
-        # Ensure the selected task does not overlap with any previously selected task
-        if all(task.end <= currentTask.start or task.start >= currentTask.end for task in selectedTasks):
-            takeProfit += computeProfit(nextCompatibleTask, selectedTasks + [currentTask])[0]
-            bestPath = [currentTask] + computeProfit(nextCompatibleTask, selectedTasks + [currentTask])[1]
-        else:
-            takeProfit = -1  # Invalidate this path so it doesn't get selected
-            bestPath = []
-
-        # Choose the better option (max profit)
+        
+        # Add profit of the next task to the original
+        takeProfit += computeProfit(nextCompatibleTask)[0]
+        
+        # Determine which option is better
         if takeProfit > skipProfit:
             bestProfit = takeProfit
+            bestPath = [currentTask] + computeProfit(nextCompatibleTask)[1]  # Include current task in path
         else:
             bestProfit = skipProfit
             bestPath = skipPath
-
-        # Store results in memoization tables
+        
+        # Memoize the result and path for this index
         memo[listIndex] = bestProfit
         memoPath[listIndex] = bestPath
-
-        # Ensure unique, valid paths in allPaths
-        if (bestPath, bestProfit) not in allPaths and bestProfit != -1:
+        
+        # Checks if the certain path is in allPaths. If not, add it!
+        if (bestPath, bestProfit) not in allPaths:
             allPaths.append((bestPath, bestProfit))
 
+        
         return bestProfit, bestPath
-
-    # Compute the maximum profit schedule
+    
+    # Call the function again
     max_profit, path = computeProfit(0)
-
-    # Sort all valid schedules by earnings in descending order
+    
+    # Sort all paths by total earnings in descending order
     allPaths.sort(key=lambda x: x[1], reverse=True)
-
+    
     return allPaths, max_profit
-
 
 
 """
