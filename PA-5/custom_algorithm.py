@@ -29,14 +29,15 @@ def find_max_sets(tasks):
     max_task_count = max(dp, key=lambda x: x[0])[0]
     all_schedules = [schedule for count, schedules in dp for schedule in schedules if count == max_task_count]
 
-    print(all_schedules)
-
     # Remove subsets efficiently
     filtered_schedules = []
     for schedule in all_schedules:
         schedule_set = set((task.pay, task.start, task.end, task.name) for task in schedule)
 
-        if not any(set(other_schedule).issubset(schedule_set) for other_schedule in all_schedules if other_schedule != schedule):
+        # Ensure we only remove *proper* subsets (not equal sets)
+        if not any(set(task.name for task in schedule) < set(task.name for task in other_schedule) 
+                for other_schedule in filtered_schedules):
             filtered_schedules.append(schedule)
+
 
     return filtered_schedules

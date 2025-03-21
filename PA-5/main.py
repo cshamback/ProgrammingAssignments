@@ -70,31 +70,44 @@ while True:
     maxProfit = dp(tasks)
     elapsed_time = (time.time() - start_time) * 1000 #converts to ms
 
-# Print Results of Time and Earnings for Dynamic Programming Algorithm
+    # Print Results of Time and Earnings for Dynamic Programming Algorithm
     print(f"The time elapsed in the non-recursive dynamic programming algorithm is {elapsed_time:.6f} ms and value is {maxProfit}")
 
-# Calls find max sets function from custom_algorithm.py
+    # Print Best Schedule for Max Earnings
+    print("\nThe best schedule for maximum earnings is: ")
+    for idx, schedule in enumerate(best_schedules, 1):
+        task_order = " -> ".join(task.name for task in schedule)
+        total_earning = sum(task.pay for task in schedule)
+        print(f"Option {idx}: {task_order}, with a total earning of {maxProfit}")
+
+    # Calls find max sets function from custom_algorithm.py
     start_time = time.time()
     find_max_result = find_max_sets(tasks) #changed variable name so it doesn't overwrite itself if user continues
 
-# Print Results of Custom Algorithm
-    print(f"\nThere are {len(find_max_result)} options to select different sets of tasks.")
-    for idx, schedule in enumerate(find_max_result, 1):
+    # Identify the best schedule(s) and remove them from "other options"
+    best_schedule = best_schedules[0] if best_schedules else None
+    other_options = [schedule for schedule in find_max_result if schedule != best_schedule]
+    num_other_options = len(other_options)  # Correct count after filtering
+
+    # Prints all options
+    print(f"\nHere are different options of sets of tasks to select from.")
+    
+    for idx, schedule in enumerate(other_options, 1):  # Print only "other" schedules
         task_order = " -> ".join(task.name for task in schedule)
-        total_earning = sum(task.pay for task in schedule) 
+        total_earning = sum(task.pay for task in schedule)
         print(f"Option {idx}: {task_order}, with a total earning of {total_earning}")
 
-# Continuation Prompt
-        while True:
-            cont = input("\nWould you like to continue and enter new tasks? (y/n): \n").strip().lower()
+    # Continuation Prompt
+    while True:
+        cont = input("\nWould you like to continue and enter new tasks? (y/n): \n").strip().lower()
     
-            if cont == "y":
-                print("\nRestarting the program...\n")
-                break  # breaks out inner loop and restarts main loop
+        if cont == "y":
+            print("\nRestarting the program...\n")
+            break  # breaks out inner loop and restarts main loop
 
-            elif cont == "n":
-                print("\nGoodbye!\n")
-                exit() #exits the program entirely
+        elif cont == "n":
+            print("\nGoodbye!\n")
+            exit() #exits the program entirely
 
-            else:
-                print("Invalid input. Please enter 'y' or 'n'.")
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
