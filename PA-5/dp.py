@@ -1,8 +1,6 @@
 from task import *
 from merge import *
 
-from collections import defaultdict
-
 # prints dictionary of tasks as lists separated by arrows
 def printTasks(memo):
     for key in memo: 
@@ -10,21 +8,6 @@ def printTasks(memo):
         for taskList in memo[key]:
             print(" " + " -> ".join(taskList), end="")
             print(" with a total earning of " + str(key) + ".")
-
-def countTaskLists(memo):
-    count = 0
-    for key in memo: 
-        for taskList in memo[key]:
-            count += 1
-    return count 
-
-# checks if the start or end times overlap, returns bool
-def overlaps(t1, t2): 
-    # overlap if t1 starts in the middle of t2, or t1 ends in the middle of t2
-    return (t1.start < t2.start and t2.start < t1.end) or (t1.start < t2.end and t2.end < t1.end)
-
-# given a 2d array and a list, remove all subsets of the list from the 2d array
-def removeSubsets(memo):
     # convert each value (2d array) to a list of frozen sets
     # frozen sets are sets that cannot be modified
     memoSets = {key: [frozenset(sublist) for sublist in value] for key, value in memo.items()}
