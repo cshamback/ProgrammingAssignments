@@ -12,6 +12,8 @@ print("If an invalid symbol is added, you will be asked to start over.")
 validChars = set(['A', 'C', 'T', 'G', '-', '_'])
 seq1 = getValidString(validChars).upper()
 
+print()
+
 print(f"Please enter the second DNA sequence. This should be the same length as the first one: {len(seq1)} characters.")
 print(f"If it is too short, a string of the '-' character will be appended to it. If it is too long, it will be truncated.")
 
