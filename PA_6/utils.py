@@ -27,11 +27,39 @@ def getValidString(validChars):
 # arr is the 2d arr that we're making a traceback for
 
 def findTraceback(arr):
-    arrows = ["⭦", "⭡", "⭠ "] # used to print traceback chart
-    chart = list(np.zeros_like(np.array(arr))) # create a blank 2d arr with the same number of spaces as arr
+    chart = [[] for _ in range(len(arr))] # create a blank 2d arr with the same number of rows as arr
 
-    # iterate thru input arr
-     
+    # row 0 has no arrows, just numbers - insert those; leave spaces for arrows
+    for i in range(len(arr[0]) - 1, 0, -1): # iterate backwards so we can prepend easier
+        chart[0].insert(0, str(arr[0][i]))
+        chart[0].insert(0, " ")
+
+    print(chart)
+
+    # iterate thru input arr - ignoring first row and first col
+    for row in range(len(arr) - 1, 0, -1): # all rows except first one
+        for col in range(len(arr[row]) - 1, 0, -1): # all cols except first one
+            bestAdj = getMaxAdjacent(arr, row, col)
+
+            # add an arrow to the chart to the left of arr[row][col] that points toward bestAdj
+            # [[arrow], reward] goes in same row, gets prepended to that row (first col)
+
+            # figure out what arrow to use, order: (row, col)
+            currArrow = " "
+            if bestAdj[1] == col - 1: # left of current
+                if bestAdj[0] == row - 1: # also above current
+                    currArrow = "⭦ "
+                else: # left but not above 
+                    currArrow = "⭠ "
+            else: # above current
+                currArrow =  "⭡ "
+
+            chart[row].insert(0, arr[row][col])
+            chart[row].insert(0, currArrow)
+
+            print(f"Current arrow: {currArrow} Current score: {arr[row][col]}")
+                
+    print(chart)
     return chart
 
 # returns tuple of row and column of adjacent highest score to input cell (row, col)
@@ -85,12 +113,15 @@ def print_matrix(matrix, seq1, seq2):
             print(f"{matrix[i][j]:>4}", end="")
         print()
 
-"""
-FOR TESTING: uncomment to test getMaxAdjacent()
+
+#FOR TESTING: uncomment to test getMaxAdjacent()
 sample = [[0, -1, -2, -3, -4],[-1, 4, 6, 7, 7],[-2, 4, 6, 9, 9],[-3, 7, 6, 5, 10], [-4, 10, 19, 5, 6]]
 print_matrix(sample, "AAAA", "AAAA")
 getMaxAdjacent(sample, 2, 4)
 getMaxAdjacent(sample, 1, 1)
 getMaxAdjacent(sample, 4, 4)
-getMaxAdjacent(sample, 1, 3)"
-""""
+getMaxAdjacent(sample, 1, 3)
+
+traceback = findTraceback(sample)
+print(traceback)
+print_matrix(traceback, "AAAA", "AAAA")
