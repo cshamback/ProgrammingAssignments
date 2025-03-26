@@ -19,7 +19,6 @@ def getValidString(validChars):
 
     return seq1
 
-<<<<<<< HEAD
 # TRACEBACK CHART
 
 # goal: starting at bottom right, iterate through every cell in the output chart. 
@@ -37,11 +36,31 @@ def findTraceback(arr):
 
 # returns tuple of row and column of adjacent highest score to input cell (row, col)
 # can only go left, up, or up and left, find max of all 3. 
-def getAdjacent(arr, row, col):
+
+# arr is the 2d array of scores already calculated
+# row and col are the indexes of a cell to find the arrow for 
+
+def getMaxAdjacent(arr, row, col):
     adjRow = 0
     adjCol = 0
+
+    adjacent = [[row - 1, col], [row, col - 1], [row - 1, col - 1]]
+    maxScore = float('-inf')
+
+    for i in range(len(adjacent)):
+        # get reward/penalty associated with tuple in adjacent 
+        score = arr[adjacent[i][0]][adjacent[i][1]] # always 2 vals in each row, 1st is row and 2nd is col
+        
+        # compare what was found to current max
+        if score > maxScore: 
+            maxScore = score
+            adjRow = adjacent[i][0]
+            adjCol = adjacent[i][1]
+
+    print(f"Max adjacent score for {row},{col}, score = {arr[row][col]} is: {adjRow}, {adjCol}")
+
     return (adjRow, adjCol)
-=======
+
 def print_matrix(matrix, seq1, seq2):
 #Pretty prints the scoring matrix with sequence labels.
 #seq1 goes across the top (columns), seq2 goes down the side (rows).
@@ -65,4 +84,13 @@ def print_matrix(matrix, seq1, seq2):
         for j in range(len(matrix[0])):
             print(f"{matrix[i][j]:>4}", end="")
         print()
->>>>>>> ec3155d9942bda3146dc6a226ed36eb027a8a8b3
+
+"""
+FOR TESTING: uncomment to test getMaxAdjacent()
+sample = [[0, -1, -2, -3, -4],[-1, 4, 6, 7, 7],[-2, 4, 6, 9, 9],[-3, 7, 6, 5, 10], [-4, 10, 19, 5, 6]]
+print_matrix(sample, "AAAA", "AAAA")
+getMaxAdjacent(sample, 2, 4)
+getMaxAdjacent(sample, 1, 1)
+getMaxAdjacent(sample, 4, 4)
+getMaxAdjacent(sample, 1, 3)"
+""""
