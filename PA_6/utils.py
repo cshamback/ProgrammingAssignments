@@ -19,6 +19,7 @@ def getValidString(validChars):
 
     return seq1
 
+<<<<<<< HEAD
 # TRACEBACK CHART
 
 # goal: starting at bottom right, iterate through every cell in the output chart. 
@@ -40,3 +41,28 @@ def getAdjacent(arr, row, col):
     adjRow = 0
     adjCol = 0
     return (adjRow, adjCol)
+=======
+def print_matrix(matrix, seq1, seq2):
+#Pretty prints the scoring matrix with sequence labels.
+#seq1 goes across the top (columns), seq2 goes down the side (rows).
+    cols = len(seq1)
+    rows = len(seq2)
+
+    # Print header row
+    print("    ", end="")
+    print("    ", end="")  # top-left corner empty cell
+    for char in seq1:
+        print(f"{char:>4}", end="")
+    print()
+
+    # Print each row with row label
+    for i in range(len(matrix)):
+        if i == 0:
+            print("    ", end="")  # first empty row label
+        else:
+            print(f"{seq2[i - 1]:>4}", end="")
+
+        for j in range(len(matrix[0])):
+            print(f"{matrix[i][j]:>4}", end="")
+        print()
+>>>>>>> ec3155d9942bda3146dc6a226ed36eb027a8a8b3
