@@ -10,25 +10,21 @@ print()
 print("Please enter the first DNA sequence.") # Use the symbols ACGT, '_', and '-', where '_' and '-' represent gaps in the sequence.")
 #print("If an invalid symbol is added, you will be asked to start over.")
 
-validChars = set(['A', 'C', 'T', 'G', '-', '_'])
+validChars = set(['A', 'C', 'T', 'G', '-', '_', " "])
 seq1 = getValidString(validChars).upper()
 
 print()
-
-print(f"Please enter the second DNA sequence. This should be the same length as the first one: {len(seq1)} characters.")
-print(f"If it is too short, a string of the '-' character will be appended to it. If it is too long, it will be truncated.")
-
 print(f"Please enter the second DNA sequence.") #This should be the same length as the first one: {len(seq1)} characters. 
 
 seq2 = getValidString(validChars).upper()
 
 print()
-
 print("Sequences:")
 print(seq1)
 print(seq2)
 print()
 
+print("For all of the following, please enter positive integers for rewards and negative integers for penalties.")
 match = int(input("Please enter the match reward as an integer: "))
 mismatch = int(input("Please enter the mismatch penalty as an integer: "))
 gap = int(input("Please enter the gap penalty as an integer: "))
@@ -37,3 +33,11 @@ matrix = initialize_matrix(seq1, seq2, match, mismatch, gap)
 
 print("\nThe Needleman-Wunsch Matrix:")
 print_matrix(matrix, seq1, seq2)
+
+traceback = findTraceback(matrix)
+
+# fix y axis sequence so that its letters match up with their scores
+seq1 = addSpaceToHeader(seq1)
+
+print("\nTraceback chart for the Needleman-Wunsch Matrix:")
+print_matrix(traceback, seq1, seq2)

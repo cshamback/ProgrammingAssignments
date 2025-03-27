@@ -92,6 +92,19 @@ def getMaxAdjacent(arr, row, col):
 
     return (adjRow, adjCol)
 
+# OUTPUT
+
+# space header appropriately to match traceback chart 
+def addSpaceToHeader(seq):
+    newSeq = ""
+
+    # for every char in seq, prepend a space
+    # ex: "AAAA" -> " A A A A"
+    for i in range(len(seq)): 
+        newSeq += " "
+        newSeq += seq[i]
+    return newSeq
+
 def print_matrix(matrix, seq1, seq2):
 #Pretty prints the scoring matrix with sequence labels.
 #seq1 goes across the top (columns), seq2 goes down the side (rows).
@@ -117,6 +130,7 @@ def print_matrix(matrix, seq1, seq2):
         print()
 
 
+"""
 #FOR TESTING: uncomment to test getMaxAdjacent()
 sample = [[0, -1, -2, -3, -4],
           [-1, 4, 6, 7, 7],
@@ -124,11 +138,12 @@ sample = [[0, -1, -2, -3, -4],
           [-3, 7, 6, 10, 5], 
           [-4, 10, 19, 5, 6]]
 
-"""print_matrix(sample, "AAAA", "AAAA")
+print_matrix(sample, "AAAA", "AAAA")
 getMaxAdjacent(sample, 2, 4)
 getMaxAdjacent(sample, 1, 1)
 getMaxAdjacent(sample, 4, 4)
-getMaxAdjacent(sample, 1, 3)"""
+getMaxAdjacent(sample, 1, 3)
 
 traceback = findTraceback(sample)
 print_matrix(traceback, " A A A A", "AAAA")
+"""
