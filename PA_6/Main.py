@@ -24,7 +24,7 @@ print(seq1)
 print(seq2)
 print()
 
-print("Please make sure the match input is larger than gap and mismatch, regardless of if the inputs are odd or even.")
+print("Please make sure the match input is larger than gap and mismatch, regardless of if the inputs are positive or negative.")
 match = int(input("Please enter the match reward as an integer: "))
 mismatch = int(input("Please enter the mismatch penalty as an integer: "))
 gap = int(input("Please enter the gap penalty as an integer: "))
