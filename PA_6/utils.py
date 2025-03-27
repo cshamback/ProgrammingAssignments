@@ -1,5 +1,3 @@
-import numpy as np
-
 # INPUT 
 
 # get a valid string of valid chars from user 
