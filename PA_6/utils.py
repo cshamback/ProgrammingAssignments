@@ -1,5 +1,3 @@
-import numpy as np
-
 # INPUT 
 
 # get a valid string of valid chars from user 
@@ -33,11 +31,13 @@ def findTraceback(arr):
     for i in range(len(arr[0]) - 1, 0, -1): # iterate backwards so we can prepend easier
         chart[0].insert(0, str(arr[0][i]))
         chart[0].insert(0, " ")
+    chart[0].insert(0, 0)
 
-    print(chart)
+    # print(chart)
 
     # iterate thru input arr - ignoring first row and first col
     for row in range(len(arr) - 1, 0, -1): # all rows except first one
+
         for col in range(len(arr[row]) - 1, 0, -1): # all cols except first one
             bestAdj = getMaxAdjacent(arr, row, col)
 
@@ -48,18 +48,21 @@ def findTraceback(arr):
             currArrow = " "
             if bestAdj[1] == col - 1: # left of current
                 if bestAdj[0] == row - 1: # also above current
-                    currArrow = "⭦ "
+                    currArrow = "⭦"
                 else: # left but not above 
-                    currArrow = "⭠ "
+                    currArrow = "⭠"
             else: # above current
-                currArrow =  "⭡ "
+                currArrow =  "⭡"
 
             chart[row].insert(0, arr[row][col])
             chart[row].insert(0, currArrow)
 
-            print(f"Current arrow: {currArrow} Current score: {arr[row][col]}")
+            #print(f"Current arrow: {currArrow} Current score: {arr[row][col]}")
+        
+        # add first item, in each row, which doesn't get an arrow
+        chart[row].insert(0, arr[row][0])
                 
-    print(chart)
+    #print(chart)
     return chart
 
 # returns tuple of row and column of adjacent highest score to input cell (row, col)
@@ -85,7 +88,7 @@ def getMaxAdjacent(arr, row, col):
             adjRow = adjacent[i][0]
             adjCol = adjacent[i][1]
 
-    print(f"Max adjacent score for {row},{col}, score = {arr[row][col]} is: {adjRow}, {adjCol}")
+    #print(f"Max adjacent score for {row},{col}, score = {arr[row][col]} is: {adjRow}, {adjCol}")
 
     return (adjRow, adjCol)
 
@@ -115,13 +118,17 @@ def print_matrix(matrix, seq1, seq2):
 
 
 #FOR TESTING: uncomment to test getMaxAdjacent()
-sample = [[0, -1, -2, -3, -4],[-1, 4, 6, 7, 7],[-2, 4, 6, 9, 9],[-3, 7, 6, 5, 10], [-4, 10, 19, 5, 6]]
-print_matrix(sample, "AAAA", "AAAA")
+sample = [[0, -1, -2, -3, -4],
+          [-1, 4, 6, 7, 7],
+          [-2, 4, 6, 9, 9],
+          [-3, 7, 6, 10, 5], 
+          [-4, 10, 19, 5, 6]]
+
+"""print_matrix(sample, "AAAA", "AAAA")
 getMaxAdjacent(sample, 2, 4)
 getMaxAdjacent(sample, 1, 1)
 getMaxAdjacent(sample, 4, 4)
-getMaxAdjacent(sample, 1, 3)
+getMaxAdjacent(sample, 1, 3)"""
 
 traceback = findTraceback(sample)
-print(traceback)
-print_matrix(traceback, "AAAA", "AAAA")
+print_matrix(traceback, " A A A A", "AAAA")
