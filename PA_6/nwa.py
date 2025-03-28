@@ -40,3 +40,35 @@ def initialize_matrix(dna1, dna2, match, mismatch, gap):
             matrix[i][j] = max(diag_score, vert_score, horiz_score)
         
     return matrix
+
+def get_all_alignments(matrix, seq1, seq2, match, mismatch, gap):
+    """
+    Recursively finds all optimal alignments from the DP matrix.
+
+    Returns:
+        alignments (list of tuples): List of (aligned_seq1, aligned_seq2)
+    """
+    alignments = []
+
+    def traceback(i, j, aligned1, aligned2):
+        if i == 0 and j == 0:
+            alignments.append((aligned1[::-1], aligned2[::-1]))
+            return
+
+        # Diagonal move: match or mismatch
+        if i > 0 and j > 0:
+            score = match if seq1[j-1] == seq2[i-1] else mismatch
+            if 0 <= i-1 < len(matrix) and 0 <= j-1 < len(matrix[0]):
+                if matrix[i][j] == matrix[i-1][j-1] + score:
+                    traceback(i-1, j-1, aligned1 + seq1[j-1], aligned2 + seq2[i-1])
+
+        # Up move: gap in seq1
+        if i > 0 and matrix[i][j] == matrix[i-1][j] + gap:
+            traceback(i-1, j, aligned1 + "-", aligned2 + seq2[i-1])
+
+        # Left move: gap in seq2
+        if j > 0 and matrix[i][j] == matrix[i][j-1] + gap:
+            traceback(i, j-1, aligned1 + seq1[j-1], aligned2 + "-")
+
+    traceback(len(seq2), len(seq1), "", "")
+    return alignments
