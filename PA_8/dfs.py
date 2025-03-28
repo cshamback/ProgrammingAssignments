@@ -40,7 +40,6 @@ def DFS(graph, beginner_node):
     # Keeps executing until the stack is empty
     while stack:
         node = stack.pop()
-        print(node)
         for next_node in graph[node]:
             # Checks for nodes we haven't seen
             if next_node not in seen:
@@ -48,6 +47,7 @@ def DFS(graph, beginner_node):
                 seen.append(next_node)
                 # Put this in the stack
                 stack.append(next_node)
+        print(node)
 
 # Test code
 graph = {
