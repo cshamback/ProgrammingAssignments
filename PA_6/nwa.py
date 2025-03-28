@@ -3,7 +3,9 @@
 # match score, mismatch score (penalty for mismatch), gap score (penalty for gap)
 # dna sequences are strings
 # scores are integers
+from functools import cache
 
+@cache
 def initialize_matrix(dna1, dna2, match, mismatch, gap):
     rows = len(dna2) + 1
     cols = len(dna1) + 1
