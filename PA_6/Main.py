@@ -1,7 +1,6 @@
 # MAIN
 from utils import *
-from nwa import initialize_matrix
-from nwa import get_all_alignments
+from nwa import *
 
 print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
 print("* P A 6  N E E D L E M A N - W U N S C H  A L G O R I T H M *")
@@ -44,10 +43,4 @@ seq1 = addSpaceToHeader(seq1)
 print("\nTraceback chart for the Needleman-Wunsch Matrix:")
 print_matrix(traceback, seq1, seq2)
 
-print("\nAll Optimal Alignments:")
-for a1, a2 in alignments:
-    print(a1)
-    print(a2)
-    print("Score:", matrix[-1][-1])
-    print()
-    break  # remove this `break` if you want to show ALL alignments
+print_alignments(alignments, matrix[-1][-1])

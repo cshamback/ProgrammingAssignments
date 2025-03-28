@@ -72,3 +72,24 @@ def get_all_alignments(matrix, seq1, seq2, match, mismatch, gap):
 
     traceback(len(seq2), len(seq1), "", "")
     return alignments
+
+def print_alignments(alignments, score):
+    print("\nAll Optimal Alignments:")
+    for a1, a2 in alignments:
+        # Build a visual match line
+        match_line = ""
+        for c1, c2 in zip(a1, a2):
+            if c1 == c2:
+                match_line += "|"
+            elif c1 == "-" or c2 == "-":
+                match_line += " "
+            else:
+                match_line += "."
+
+        # Print the alignment
+        print(a1)
+        print(match_line)
+        print(a2)
+        print(f"Score: {score}")
+        print()
+
