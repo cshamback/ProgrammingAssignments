@@ -27,8 +27,6 @@ def dfs(data, visited, target, currentNode):
 # Liem's code
 # I FOUND IT  
 def DFS(graph, beginner_node):
-    # Start at this node
-    beginner_node = 0
 
     # A place to store all the nodes we've seen
     seen = []
