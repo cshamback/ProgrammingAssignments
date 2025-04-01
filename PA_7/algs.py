@@ -92,3 +92,19 @@ def dfs(data, visited, target, currentNode):
             path = dfs(data, visited, target, neighbor) # pass the whole list recursively but change the current node as an integer index
             if path:
                 return [currentNode] + path
+            
+def adjacencyMatrix(graph):
+    size = len(graph)
+    matrix = []
+
+    # fills matrix with 0's
+    for i in range(size):
+        matrix.append([0]*size)
+
+    for beginNode,neighbors in enumerate(graph):
+        # Makes connections!
+        for endNode in neighbors:
+            matrix[beginNode][endNode] = 1 
+    return matrix
+
+

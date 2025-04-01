@@ -26,7 +26,7 @@ def getArray(input):
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 graph = Graph()
-
+'''
 demoGraph = [
     [1, 2, 3],
     [0, 2],
@@ -36,9 +36,9 @@ demoGraph = [
 ]
 graph.setGraph(demoGraph)
 graph.printGraph()
-
-
 '''
+
+
 print("GRAPH CREATION ========================================================================================================")
 print("Enter nodes one at a time.")
 print("Each should be a series of integers (other nodes this node connects to) separated by commas. Press enter between nodes.\n")
@@ -68,6 +68,8 @@ while(nextInput != "q" and nextInput != "Q"):
 #   since we are using a directed graph as required by SCC, we only create nodes going to 4 and 5 from 0, not the other way around 
 
 graphArr = graph.getGraph()
+
+# Adjacency List Likely
 for currNode in range(0, len(graphArr)): # look at every node 
     for currEdge in range(0, len(graphArr[currNode])): # look at every edge in that node 
 
@@ -87,7 +89,12 @@ for currNode in range(0, len(graphArr)): # look at every node
 
 print("Your graph so far:")
 graph.printGraph()
+print("WOW")
 
+# Adjacency Matrix
+Adjacent = adjacencyMatrix(graphArr)
+for row in Adjacent:
+    print(row)
 nextInput = input("Would you like to add any additional edges before moving on to the SCC algorithm? (Y/N)")
 
 if(nextInput == "Y" or nextInput == "y"):
@@ -103,7 +110,7 @@ if(nextInput == "Y" or nextInput == "y"):
 print("Your finished graph: ")
 graph.printGraph()
 
-'''
+
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN BFS ==============================================================================================================================================
