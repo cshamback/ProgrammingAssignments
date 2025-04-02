@@ -89,9 +89,9 @@ for currNode in range(0, len(graphArr)): # look at every node
 
 print("Your graph so far:")
 graph.printGraph()
-print("WOW")
 
 # Adjacency Matrix
+print("Your adjacency matrix: ")
 Adjacent = adjacencyMatrix(graphArr)
 for row in Adjacent:
     print(row)
@@ -107,17 +107,11 @@ if(nextInput == "Y" or nextInput == "y"):
         if edges != None:  #getArray returns none if input is invalid. if it is invalid, don't create anything. 
             graph.addEdge(edges[0], edges[1])
 
-print("Your finished graph: ")
+print("Your finished graph as an adjacency list: ")
 graph.printGraph()
 
-<<<<<<< HEAD:PA_7-8/PA-7-8-Source.py
-s = input("What node would you like to start from?")
-e = input("What node would you like to search for?)
-
-'''
-=======
-
->>>>>>> 32c1c6b1c700f5b140fca098f91ff309ee47e74a:PA_7/PA-7-8-Source.py
+s = input("What node would you like to start from? ")
+e = input("What node would you like to search for? ")
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN BFS ==============================================================================================================================================
