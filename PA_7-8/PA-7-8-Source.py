@@ -103,13 +103,18 @@ if(nextInput == "Y" or nextInput == "y"):
 print("Your finished graph: ")
 graph.printGraph()
 
+s = input("What node would you like to start from?")
+e = input("What node would you like to search for?)
+
 '''
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN BFS ==============================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-print("BFS from 0 to 4: ", bfs(0, 4, graph.getGraph()))
+s = 0
+e = 4
+print(f"BFS from {s} to {e}: ", bfs(s, e, graph.getGraph()))
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # OUTPUT RESULTS (BFS) =================================================================================================================================
@@ -120,15 +125,22 @@ print("BFS from 0 to 4: ", bfs(0, 4, graph.getGraph()))
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #dfs(graph, target, startingNode) -> can start at any node, arbitrarily choosing 0
+# start node specified by the user 
 
-# one index for each node in graph, all start as False because no one has been visited yet 
+# DFS stuff 
+"""# one index for each node in graph, all start as False because no one has been visited yet 
 # declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
 visited = [False for i in range(len(graph.getGraph()))]
-print("Result: ", dfs(graph.getGraph(), visited, 7, 0), "\n")
+print("Result: ", dfs(graph.getGraph(), visited, e, s), "\n")"""
 
-# reset visited array for new search
-visited = [False for i in range(len(graph.getGraph()))]
-print("Result: ", dfs(graph.getGraph(), visited, 4, 0))
+
+# test data
+"""nodes = [1, 2, 3, 4, 5, 6]
+colors = ['w', 'g', 'b', 'b', 'b', 'b']
+distances = [0, 4, 5, 1, 0, 2]
+prev = [1, 4, 5, 3, 4, 1]
+
+printTB(nodes, colors, distances, prev)"""
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # OUTPUT RESULTS (DFS) =================================================================================================================================
