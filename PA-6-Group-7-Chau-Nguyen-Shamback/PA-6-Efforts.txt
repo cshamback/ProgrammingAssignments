@@ -1,0 +1,7 @@
+# How to run the program?
+Click the PA-6-Executable.exe file. This will open a browser window. Fork/remix the Replit, then click the green "run" button at the top of the screen. In order for this to appear, you may need to select the "Main.py" file. 
+
+# Group member contributions
+Liem Chau: 100% (Liem Chau)
+Steve Nguyen: 100% (Steve Nguyen)
+Cody Shamback: 100% (Cody Shamback)

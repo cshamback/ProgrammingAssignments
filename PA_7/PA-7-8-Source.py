@@ -26,7 +26,7 @@ def getArray(input):
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 graph = Graph()
-
+'''
 demoGraph = [
     [1, 2, 3],
     [0, 2],
@@ -36,9 +36,9 @@ demoGraph = [
 ]
 graph.setGraph(demoGraph)
 graph.printGraph()
-
-
 '''
+
+
 print("GRAPH CREATION ========================================================================================================")
 print("Enter nodes one at a time.")
 print("Each should be a series of integers (other nodes this node connects to) separated by commas. Press enter between nodes.\n")
@@ -68,6 +68,8 @@ while(nextInput != "q" and nextInput != "Q"):
 #   since we are using a directed graph as required by SCC, we only create nodes going to 4 and 5 from 0, not the other way around 
 
 graphArr = graph.getGraph()
+
+# Adjacency List Likely
 for currNode in range(0, len(graphArr)): # look at every node 
     for currEdge in range(0, len(graphArr[currNode])): # look at every edge in that node 
 
@@ -88,6 +90,11 @@ for currNode in range(0, len(graphArr)): # look at every node
 print("Your graph so far:")
 graph.printGraph()
 
+# Adjacency Matrix
+print("Your adjacency matrix: ")
+Adjacent = adjacencyMatrix(graphArr)
+for row in Adjacent:
+    print(row)
 nextInput = input("Would you like to add any additional edges before moving on to the SCC algorithm? (Y/N)")
 
 if(nextInput == "Y" or nextInput == "y"):
@@ -100,16 +107,19 @@ if(nextInput == "Y" or nextInput == "y"):
         if edges != None:  #getArray returns none if input is invalid. if it is invalid, don't create anything. 
             graph.addEdge(edges[0], edges[1])
 
-print("Your finished graph: ")
+print("Your finished graph as an adjacency list: ")
 graph.printGraph()
 
-'''
+s = input("What node would you like to start from? ")
+e = input("What node would you like to search for? ")
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUN BFS ==============================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-print("BFS from 0 to 4: ", bfs(0, 4, graph.getGraph()))
+s = 0
+e = 4
+print(f"BFS from {s} to {e}: ", bfs(s, e, graph.getGraph()))
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # OUTPUT RESULTS (BFS) =================================================================================================================================
@@ -120,15 +130,22 @@ print("BFS from 0 to 4: ", bfs(0, 4, graph.getGraph()))
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #dfs(graph, target, startingNode) -> can start at any node, arbitrarily choosing 0
+# start node specified by the user 
 
-# one index for each node in graph, all start as False because no one has been visited yet 
+# DFS stuff 
+"""# one index for each node in graph, all start as False because no one has been visited yet 
 # declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
 visited = [False for i in range(len(graph.getGraph()))]
-print("Result: ", dfs(graph.getGraph(), visited, 7, 0), "\n")
+print("Result: ", dfs(graph.getGraph(), visited, e, s), "\n")"""
 
-# reset visited array for new search
-visited = [False for i in range(len(graph.getGraph()))]
-print("Result: ", dfs(graph.getGraph(), visited, 4, 0))
+
+# test data
+"""nodes = [1, 2, 3, 4, 5, 6]
+colors = ['w', 'g', 'b', 'b', 'b', 'b']
+distances = [0, 4, 5, 1, 0, 2]
+prev = [1, 4, 5, 3, 4, 1]
+
+printTB(nodes, colors, distances, prev)"""
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # OUTPUT RESULTS (DFS) =================================================================================================================================
