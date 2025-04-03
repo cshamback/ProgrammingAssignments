@@ -103,6 +103,7 @@ def solve(s, data): # most of the work for BFS done here
 def reconstructPath(s, e, prev): # ensures path is a valid path from S -> E and returns that path 
     # reconstruct path backwards from e to s
     path = []
+    #print(f"Reconstructing path from {s} to {e}")
 
     # iterate through prev array from e to s
     # stop if we find a null value 
