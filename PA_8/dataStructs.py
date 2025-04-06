@@ -39,6 +39,9 @@ class Graph:
     def setGraph(self, graphVals):
         self.graph = graphVals
 
+    def getLength(self):
+        return len(self.graph)
+
 # used in BFS (instead of recursion/stack used by DFS)
 class Queue: 
 
