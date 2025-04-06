@@ -124,6 +124,35 @@ def DFS(graph, beginner_node):
 }
 DFS(graph, 0)"""
 
+<<<<<<< HEAD
 graph = Graph() 
 graph.setGraph([[1, 2, 5], [0, 3], [0, 1, 3], [0, 1, 2, 3, 5], [1, 3, 5], [1, 2, 4]])
 dfs(graph.getGraph(), [], 5, 0)       
+=======
+# dfs part of pa-7
+# ------------------------------------------------------------------------------------------------------------------------------------------------------
+# RUN DFS ==============================================================================================================================================
+# ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#dfs(graph, target, startingNode) -> can start at any node, arbitrarily choosing 0
+# start node specified by the user 
+
+# DFS stuff 
+"""# one index for each node in graph, all start as False because no one has been visited yet 
+# declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
+visited = [False for i in range(len(graph.getGraph()))]
+print("Result: ", dfs(graph.getGraph(), visited, e, s), "\n")"""
+
+
+# test data
+"""nodes = [1, 2, 3, 4, 5, 6]
+colors = ['w', 'g', 'b', 'b', 'b', 'b']
+distances = [0, 4, 5, 1, 0, 2]
+prev = [1, 4, 5, 3, 4, 1]
+
+printTB(nodes, colors, distances, prev)"""
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------
+# OUTPUT RESULTS (DFS) =================================================================================================================================
+# ------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> 7ec2d78a30b8aa4cc0a66054b1452426056432f4

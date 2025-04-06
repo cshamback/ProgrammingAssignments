@@ -27,7 +27,7 @@ def printTB(nodes, colors, distances, prev):
     print("| Prev:      ", end="")
     printList(prev)
 
-    print("+" + '-' * (len(nodes)*2 + len("| Distances")) + "-+")    
+    print("+" + '-' * (len(nodes)*2 + len("| Distances")) + "-+")  
 
 def bfs(s, e, data): # s = start node, e = end node, data = graph represented as 2d array 
 
@@ -62,23 +62,25 @@ def solve(s, data): # most of the work for BFS done here
     nodes = []
     for i in range(len(data)):
         nodes.append(i)
-
+    
     q = Queue() # create a new, empty queue
     q.enqueue(s) # add start node to queue 
-
+    
     prev = [None for node in data] # path from start to end is empty 
 
     visited = [False for node in data] # one value of false (not visited) for each node in the graph
     visited[s] = True # but we did visit the start node
-
+    
     while(len(q.getList()) > 0): # while queue is not empty 
         node = q.dequeue()
+        
         neighbors = data[node] # data[node] returns a list of neighbors that node has 
 
         # node is the node we're currently visiting
         # next is the neighbor of node we're currently looking at 
         
         for next in neighbors: 
+            
             if not visited[next]: # loop over all unvisited nodes
                 # update traceback table - since nodes are ints, we can just use them as indices
                 colors[next] = 'g' # node is being visited for the first time - make it gray
@@ -88,15 +90,18 @@ def solve(s, data): # most of the work for BFS done here
                     prevTb[next] = '∅'
                 else:
                     prevTb[next] = node
-
+                
                 q.enqueue(next) # find a next unvisited node 
-
+                
                 visited[next] = True # mark node as visited 
+                
                 prev[next] = node # add parent of next node to prev array - "to get to next, we came from node"
 
                 # result example: prev = [None, 0, 1, None, 2] => path looks like this: [start, 1, 2, 4]
         colors[node] = 'b'
         printTB(nodes, colors, distances, prevTb)
+        print(f" WOW: {q.getList()}")
+        
 
     return prev # return path we just built 
 
