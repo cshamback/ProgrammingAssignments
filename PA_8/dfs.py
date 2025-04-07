@@ -90,6 +90,30 @@ def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target
     time += 1
     return
 
+
+# Liem's code
+# I FOUND IT  
+def DFS(graph, beginner_node):
+
+    # A place to store all the nodes we've seen
+    seen = []
+    seen.append(beginner_node)
+
+    stack = [beginner_node]
+
+    # While there's something in the stack, we pop off nodes
+    # Keeps executing until the stack is empty
+    while stack:
+        node = stack.pop()
+        for next_node in graph[node]:
+            # Checks for nodes we haven't seen
+            if next_node not in seen:
+                #Visit this node
+                seen.append(next_node)
+                # Put this in the stack
+                stack.append(next_node)
+        print(node)
+
 # Returns the adjacency matrix 
 def adjacencyMatrix(graph):
     size = len(graph.getGraph())
