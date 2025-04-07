@@ -90,6 +90,7 @@ def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target
     time += 1
     return
 
+# Returns the adjacency matrix 
 def adjacencyMatrix(graph):
     size = len(graph.getGraph())
     matrix = []
