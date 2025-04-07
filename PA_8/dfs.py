@@ -90,28 +90,19 @@ def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target
     time += 1
     return
 
-# Liem's code
-# I FOUND IT  
-def DFS(graph, beginner_node):
+def adjacencyMatrix(graph):
+    size = len(graph.getGraph())
+    matrix = []
 
-    # A place to store all the nodes we've seen
-    seen = []
-    seen.append(beginner_node)
+    # fills matrix with 0's
+    for i in range(size):
+        matrix.append([0]*size)
 
-    stack = [beginner_node]
-
-    # While there's something in the stack, we pop off nodes
-    # Keeps executing until the stack is empty
-    while stack:
-        node = stack.pop()
-        for next_node in graph[node]:
-            # Checks for nodes we haven't seen
-            if next_node not in seen:
-                #Visit this node
-                seen.append(next_node)
-                # Put this in the stack
-                stack.append(next_node)
-        print(node)
+    for beginNode,neighbors in enumerate(graph.getGraph()):
+        # Makes connections!
+        for endNode in neighbors:
+            matrix[beginNode][endNode] = 1 
+    return matrix
 
 # Test code
 """graph = {
@@ -124,35 +115,11 @@ def DFS(graph, beginner_node):
 }
 DFS(graph, 0)"""
 
-<<<<<<< HEAD
 graph = Graph() 
 graph.setGraph([[1, 2, 5], [0, 3], [0, 1, 3], [0, 1, 2, 3, 5], [1, 3, 5], [1, 2, 4]])
-dfs(graph.getGraph(), [], 5, 0)       
-=======
-# dfs part of pa-7
-# ------------------------------------------------------------------------------------------------------------------------------------------------------
-# RUN DFS ==============================================================================================================================================
-# ------------------------------------------------------------------------------------------------------------------------------------------------------
+dfs(graph.getGraph(), [], 5, 0)   
 
-#dfs(graph, target, startingNode) -> can start at any node, arbitrarily choosing 0
-# start node specified by the user 
-
-# DFS stuff 
-"""# one index for each node in graph, all start as False because no one has been visited yet 
-# declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
-visited = [False for i in range(len(graph.getGraph()))]
-print("Result: ", dfs(graph.getGraph(), visited, e, s), "\n")"""
-
-
-# test data
-"""nodes = [1, 2, 3, 4, 5, 6]
-colors = ['w', 'g', 'b', 'b', 'b', 'b']
-distances = [0, 4, 5, 1, 0, 2]
-prev = [1, 4, 5, 3, 4, 1]
-
-printTB(nodes, colors, distances, prev)"""
-
-# ------------------------------------------------------------------------------------------------------------------------------------------------------
-# OUTPUT RESULTS (DFS) =================================================================================================================================
-# ------------------------------------------------------------------------------------------------------------------------------------------------------
->>>>>>> 7ec2d78a30b8aa4cc0a66054b1452426056432f4
+print("Adjacency Matrix: ")
+adjacentMatrix = adjacencyMatrix(graph) 
+for row in adjacentMatrix:
+    print(row)   
