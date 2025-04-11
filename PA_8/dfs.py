@@ -129,6 +129,21 @@ def adjacencyMatrix(graph):
             matrix[beginNode][endNode] = 1 
     return matrix
 
+
+# Returns adjacency list
+def adjacencyList(graph):
+    # need to pull the graph from somewhere :)
+    graph = graph.getGraph()
+    # Somewhere to put empty lists in
+    Directory = {}
+
+    # iterate through the graph and key in nodes and their neighbors
+    for i, next_node in enumerate(graph):
+        Directory[i] = next_node
+
+    # return the list
+    return Directory
+# Why did the chicken cross the road?
 # Test code
 """graph = {
     0: [1, 2],
@@ -148,3 +163,7 @@ print("Adjacency Matrix: ")
 adjacentMatrix = adjacencyMatrix(graph) 
 for row in adjacentMatrix:
     print(row)   
+
+print("Adjacency List:")
+adjacencyList = adjacencyList(graph)
+print(adjacencyList)
