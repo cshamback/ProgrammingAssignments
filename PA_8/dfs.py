@@ -24,8 +24,6 @@ def printTB(nodes, colors, prev, first, last):
     print("+" + '-' * (len(nodes)*2 + len("| Predecessors")) + "-+")    
 
 
-# This is Cody's code on DFS. Putting it here so I can merge with my version later.
-# Thank you Cody.
 def dfs(graph, visited, target, currentNode):
 
     data = graph
@@ -90,29 +88,57 @@ def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target
     time += 1
     return
 
-# Liem's code
-# I FOUND IT  
-def DFS(graph, beginner_node):
 
-    # A place to store all the nodes we've seen
+def findersKeepers(graph, beginner_node):
+    # A place to store all the nodes we've been to
+    # keeps notes
     seen = []
-    seen.append(beginner_node)
-
+    # keeps track of which nodes to visit next
     stack = [beginner_node]
 
-    # While there's something in the stack, we pop off nodes
+    # While there's something in the stack, we pop off nodes we've seen
     # Keeps executing until the stack is empty
     while stack:
         node = stack.pop()
-        for next_node in graph[node]:
-            # Checks for nodes we haven't seen
-            if next_node not in seen:
-                #Visit this node
-                seen.append(next_node)
-                # Put this in the stack
-                stack.append(next_node)
-        print(node)
+        # Checks for nodes we haven't seen and adds to list
+        if node not in seen:
+            seen.append(node) 
+            for next_node in reversed(graph[node]):
+                if next_node not in seen:
+                    stack.append(next_node)
+    return seen
 
+# Returns the adjacency matrix 
+def adjacencyMatrix(graph):
+    size = len(graph.getGraph())
+    matrix = []
+
+    # fills matrix with 0's
+    for i in range(size):
+        matrix.append([0]*size)
+
+    for beginNode,neighbors in enumerate(graph.getGraph()):
+        # Makes connections!
+        for endNode in neighbors:
+            matrix[beginNode][endNode] = 1 
+    return matrix
+
+
+# Returns adjacency list
+def adjacencyList(graph):
+    # need to pull the graph from somewhere :)
+    graph = graph.getGraph()
+    # Somewhere to put empty lists in
+    Directory = {}
+
+    # iterate through the graph and key in nodes and their neighbors
+    for i, next_node in enumerate(graph):
+        Directory[i] = next_node
+
+    # return the list
+    return Directory
+
+# Why did the chicken cross the road?
 # Test code
 """graph = {
     0: [1, 2],
@@ -124,12 +150,15 @@ def DFS(graph, beginner_node):
 }
 DFS(graph, 0)"""
 
-graph = Graph() 
-graph.setGraph([[1, 2, 5], [0, 3], [0, 1, 3], [0, 1, 2, 3, 5], [1, 3, 5], [1, 2, 4]])
-dfs(graph.getGraph(), [], 5, 0)  
+#graph = Graph() 
+#graph.setGraph([[1, 2, 5], [0, 3], [0, 1, 3], [0, 1, 2, 3, 5], [1, 3, 5], [1, 2, 4]])
+
+#dfs(graph.getGraph(), [], 5, 0)  
 
 # DFS stuff 
 """# one index for each node in graph, all start as False because no one has been visited yet 
 # declare this array outside the DFS() method because dfs is recursive. this avoids the visited array being reset every run, causing overflow 
 visited = [False for i in range(len(graph.getGraph()))]
 print("Result: ", dfs(graph.getGraph(), visited, e, s), "\n")"""
+
+#dfs(graph.getGraph(), [], 5, 0)   
