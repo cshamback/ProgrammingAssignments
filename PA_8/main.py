@@ -110,26 +110,21 @@ if(nextInput == "Y" or nextInput == "y"):
 print("Your finished graph as an adjacency list: ")
 graph.printGraph()
 
-s = int(input("What node would you like to start from?"))
+ok = False
+while(not ok):
+    s = int(input("What node would you like to start from?"))
+    toVisit = int(input("Which node do you want to visit? "))
+
+    if(graphArr[s] != [] and graphArr[toVisit] != []):
+        ok = True
+    else:
+        print("Either your start or your end node has no edges. Please re-select both.")
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
-# RUN BFS ==============================================================================================================================================
+# RUN DFS ==============================================================================================================================================
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-print("Adjacency Matrix: ")
-adjacentMatrix = adjacencyMatrix(graph) 
-for row in adjacentMatrix:
-    print(row)   
+dfs(graph, [], toVisit, s)
 
-print("Adjacency List:")
-adjacencyList = adjacencyList(graph)
-print(adjacencyList)
-
-
-toVisit = int(input("Which node do you want to visit? "))
 print("Visited Nodes:")
 print(findersKeepers(graph.getGraph(),toVisit))
-
-# ------------------------------------------------------------------------------------------------------------------------------------------------------
-# OUTPUT RESULTS (BFS) =================================================================================================================================
-# ------------------------------------------------------------------------------------------------------------------------------------------------------

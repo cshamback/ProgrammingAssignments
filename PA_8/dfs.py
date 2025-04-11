@@ -26,7 +26,7 @@ def printTB(nodes, colors, prev, first, last):
 
 def dfs(graph, visited, target, currentNode):
 
-    data = graph
+    data = graph.getGraph()
     path = []
     time = 0
 
@@ -109,15 +109,15 @@ def findersKeepers(graph, beginner_node):
     return seen
 
 # Returns the adjacency matrix 
-def adjacencyMatrix(graph):
-    size = len(graph.getGraph())
+def adjacencyMatrix(graphList):
+    size = len(graphList)
     matrix = []
 
     # fills matrix with 0's
     for i in range(size):
         matrix.append([0]*size)
 
-    for beginNode,neighbors in enumerate(graph.getGraph()):
+    for beginNode,neighbors in enumerate(graphList):
         # Makes connections!
         for endNode in neighbors:
             matrix[beginNode][endNode] = 1 
@@ -125,14 +125,12 @@ def adjacencyMatrix(graph):
 
 
 # Returns adjacency list
-def adjacencyList(graph):
-    # need to pull the graph from somewhere :)
-    graph = graph.getGraph()
+def adjacencyList(graphList):
     # Somewhere to put empty lists in
     Directory = {}
 
     # iterate through the graph and key in nodes and their neighbors
-    for i, next_node in enumerate(graph):
+    for i, next_node in enumerate(graphList):
         Directory[i] = next_node
 
     # return the list
