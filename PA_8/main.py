@@ -87,14 +87,15 @@ for currNode in range(0, len(graphArr)): # look at every node
             # addEdge() automatically prevents duplicate edges 
             graph.addEdge(currNode, value)
 
-print("Your graph so far:")
-graph.printGraph()
-
 # Adjacency Matrix
 print("Your adjacency matrix: ")
 Adjacent = adjacencyMatrix(graphArr)
 for row in Adjacent:
     print(row)
+
+print("Your finished graph as an adjacency list: ")
+graph.printGraph()
+
 nextInput = input("Would you like to add any additional edges? (Y/N) ")
 
 if(nextInput == "Y" or nextInput == "y"):
@@ -107,8 +108,7 @@ if(nextInput == "Y" or nextInput == "y"):
         if edges != None:  #getArray returns none if input is invalid. if it is invalid, don't create anything. 
             graph.addEdge(edges[0], edges[1])
 
-print("Your finished graph as an adjacency list: ")
-graph.printGraph()
+
 
 ok = False
 while(not ok):
