@@ -112,7 +112,7 @@ if(nextInput == "Y" or nextInput == "y"):
 
 ok = False
 while(not ok):
-    s = int(input("What node would you like to start from?"))
+    s = int(input("What node would you like to start from? "))
     toVisit = int(input("Which node do you want to visit? "))
 
     if(graphArr[s] != [] and graphArr[toVisit] != []):
