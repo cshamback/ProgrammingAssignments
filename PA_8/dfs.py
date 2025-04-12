@@ -25,68 +25,47 @@ def printTB(nodes, colors, prev, first, last):
 
 
 def dfs(graph, visited, target, currentNode):
-
     data = graph.getGraph()
+    time = [0]  # <-- wrapped in list so it can be updated across recursive calls
     path = []
-    time = 0
 
     # initialize traceback data
-    nodes = []
-    colors = [] # w = never, g = at least once, b = all descendants visited
-    prev = [] # node visited before this node 
-    first = [] # array of times each node was first visited
-    last = [] # array of times each node was last visited
+    nodes = list(range(len(data)))
+    colors = ['w'] * len(data)
+    prev = ['∅'] * len(data)
+    first = ['∅'] * len(data)
+    last = ['∅'] * len(data)
 
-    for i in range(len(data)):
-        nodes.append(i)
-        colors.append('w')
-        prev.append('∅')
-        first.append('∅')
-        last.append('∅')
-
+    # initial tracking table
     printTB(nodes, colors, prev, first, last)
 
-    visited = [False for i in range(len(data))]
-    
-    # currently visiting a node, so update the visited array
-    visited[currentNode] = True
+    visited = [False for _ in range(len(data))]
 
-    # base case: found the target -> return it 
-    if currentNode == target: 
-        return [currentNode] # return path as a list 
-    
-    # for each node, visit all of its adjacent nodes
-    # each node is an array of edges, which are represented by IDs of the node connected by the edge, like this: 
-    # 0: [1, 2, 3] -> node 0 has edges connecting to 1, 2, and 3, so we look at the adjacent nodes to all those nodes 
-    for node in data:
-        if(colors[data.index(node)] == 'w'): # if node has never been visited
-            dfsVisit(data, node, visited, colors, prev, first, last, time, target, path) # visit that node
+    dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target, path)
+
 
 def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target, path):
+    visited[currentNode] = True
+    colors[currentNode] = 'g'
+    first[currentNode] = time[0]
+    time[0] += 1
 
-    colors[data.index(currentNode)] = 'g'
-    first[data.index(currentNode)] = time
-    time += 1
-
-    if(target in currentNode):
+    if currentNode == target:
         return
 
-    for neighbor in currentNode: # iterate through each neighbor connected to the current node  
+    for neighbor in data[currentNode]:  # now we loop over neighbors correctly
+        if not visited[neighbor]:
+            prev[neighbor] = currentNode
+            dfsVisit(data, neighbor, visited, colors, prev, first, last, time, target, path)
 
-        if visited[neighbor] == False: # if the current neighbor's node has not been visited, call DFS on it 
-            prev[neighbor] = data.index(currentNode)
-            dfsVisit(data, data[neighbor], visited, colors, prev, first, last, time, target, path)
+    colors[currentNode] = 'b'
+    last[currentNode] = time[0]
+    time[0] += 1
 
-    colors[data.index(currentNode)] = 'b'
-    last[data.index(currentNode)] = time
-
-    nodes = []
-    for i in range(len(data)):
-        nodes.append(i)
+    # show updated table
+    nodes = list(range(len(data)))
     printTB(nodes, colors, prev, first, last)
 
-    time += 1
-    return
 
 
 def findersKeepers(graph, beginner_node):
