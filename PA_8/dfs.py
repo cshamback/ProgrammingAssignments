@@ -26,25 +26,36 @@ def printTB(nodes, colors, prev, first, last):
 
 def dfs(graph, visited, target, currentNode):
     data = graph.getGraph()
-    time = [0]  # <-- wrapped in list so it can be updated across recursive calls
+    time = [0]
     path = []
 
-    # initialize traceback data
+    # Initialize all tracking data
     nodes = list(range(len(data)))
     colors = ['w'] * len(data)
     prev = ['∅'] * len(data)
     first = ['∅'] * len(data)
     last = ['∅'] * len(data)
 
-    # initial tracking table
     printTB(nodes, colors, prev, first, last)
 
     visited = [False for _ in range(len(data))]
 
-    dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target, path)
+    dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target)
+
+    print("\nPath from", currentNode, "to", target, ":")
+    if prev[target] == '∅' and currentNode != target:
+        print("No path found.")
+    else:
+        path = []
+        crawl = target
+        while crawl != '∅':
+            path.append(crawl)
+            crawl = prev[crawl]
+        path.reverse()
+        print(" → ".join(map(str, path)))
 
 
-def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target, path):
+def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target):
     visited[currentNode] = True
     colors[currentNode] = 'g'
     first[currentNode] = time[0]
@@ -56,7 +67,7 @@ def dfsVisit(data, currentNode, visited, colors, prev, first, last, time, target
     for neighbor in data[currentNode]:  # now we loop over neighbors correctly
         if not visited[neighbor]:
             prev[neighbor] = currentNode
-            dfsVisit(data, neighbor, visited, colors, prev, first, last, time, target, path)
+            dfsVisit(data, neighbor, visited, colors, prev, first, last, time, target)
 
     colors[currentNode] = 'b'
     last[currentNode] = time[0]
