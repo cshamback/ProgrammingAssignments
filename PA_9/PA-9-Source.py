@@ -83,8 +83,6 @@ for currNode in range(0, len(graphArr)): # look at every node
             # addEdge() automatically prevents duplicate edges 
             graph.addEdge(currNode, value)
 
-print("Your graph so far:")
-graph.printGraph()
 
 nextInput = input("Would you like to add any additional edges before moving on to the SCC algorithm? (Y/N)")
 
