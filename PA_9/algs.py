@@ -7,6 +7,8 @@ def scc(graph):
     stack = Stack()
     lowlinks = []
     result = [] 
+    def connect(vertex):
+        pass
 
 # OVERVIEW - DEPTH-FIRST SEARCH (DFS)
 #   traverse all adjavent vertices
