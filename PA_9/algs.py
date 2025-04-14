@@ -32,3 +32,23 @@ def dfs(data, visited, target, currentNode):
             path = dfs(data, visited, target, neighbor) # pass the whole list recursively but change the current node as an integer index
             if path:
                 return [currentNode] + path
+            
+# Testing if we can do something here
+def DFSL(graph, beginner_node):
+
+    # A place to store all the nodes we've seen
+    seen = []
+    stack = [beginner_node]
+    seen.append(beginner_node)
+
+    # While there's something in the stack, we pop off nodes
+    # Keeps executing until the stack is empty
+    while stack:
+        node = stack.pop()
+        for next_node in graph[node]:
+            # Checks for nodes we haven't seen
+            for neighbor in graph[node]:
+                if neighbor not in seen:
+                    seen.append(neighbor) # Mark neighbor as seen.
+                    stack.append(neighbor)
+    print(seen)
