@@ -3,7 +3,10 @@ from dataStructs import *
 # IMPLEMENTATION OF SCC ALGORITHM
 # returns array of Graph objects, each representing a sub-graph
 def scc(graph):
-    pass 
+    index = [0]
+    stack = Stack()
+    lowlinks = []
+    result = [] 
 
 # OVERVIEW - DEPTH-FIRST SEARCH (DFS)
 #   traverse all adjavent vertices
