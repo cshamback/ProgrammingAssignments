@@ -2,13 +2,46 @@ from dataStructs import *
 
 # IMPLEMENTATION OF SCC ALGORITHM
 # returns array of Graph objects, each representing a sub-graph
+
+# Translated from pseudocode 
 def scc(graph):
     index = [0]
+    indices = {}
     stack = Stack()
-    lowlinks = []
+    occupied_stack = set()
+    lowlinks = {}
     result = [] 
     def connect(vertex):
-        pass
+        indices[vertex] = index[0]
+        lowlinks[vertex] = index[0]
+        index[0] += 1
+
+        stack.push(vertex)
+        occupied_stack.add(vertex)
+
+        for nextVertex in graph[vertex]:
+            if nextVertex not in indices:
+                connect(nextVertex)
+                lowlinks[vertex] = min(lowlinks[vertex],lowlinks[nextVertex])
+            elif nextVertex in occupied_stack:
+                lowlinks[vertex] = min(lowlinks[vertex], indices[nextVertex])
+
+        if lowlinks[vertex] == indices[vertex]:
+            connectedComponent = []
+            while True:
+                y = stack.pop()
+                occupied_stack.remove(y)
+                connectedComponent.append(y)
+
+                if y == vertex:
+                    break
+
+            result.append(connectedComponent)
+
+    for v in range(len(graph)):
+        if v not in indices:
+            connect(v)
+
 
 # OVERVIEW - DEPTH-FIRST SEARCH (DFS)
 #   traverse all adjavent vertices
