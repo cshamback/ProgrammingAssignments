@@ -11,6 +11,7 @@ def scc(graph):
     occupied_stack = set()
     lowlinks = {}
     result = [] 
+
     def connect(vertex):
         indices[vertex] = index[0]
         lowlinks[vertex] = index[0]
@@ -36,12 +37,18 @@ def scc(graph):
                 if y == vertex:
                     break
 
+            # print current component
+            print(f"Connected Component #{len(result) + 1}: ", end="")
+            for i in range(0, len(connectedComponent) - 1):
+                print(f"{connectedComponent[i]} -> ", end='')
+            print(connectedComponent[len(connectedComponent) - 1])
             result.append(connectedComponent)
 
     for v in range(len(graph)):
         if v not in indices:
             connect(v)
 
+    return result
 
 # OVERVIEW - DEPTH-FIRST SEARCH (DFS)
 #   traverse all adjavent vertices
